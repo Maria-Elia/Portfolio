@@ -156,6 +156,10 @@ ul {
   filter: drop-shadow(0 0 0.8rem var(--yellow-soft));
 }
 
+.hero__swoosh--bottom {
+  width: 36rem;
+}
+
 .hero__wordmark {
   font-family: "Fredoka", sans-serif;
   font-weight: 600;

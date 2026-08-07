@@ -24,7 +24,7 @@ function initNav() {
 function initHero() {
   const wordmark = document.querySelector(".hero__wordmark");
   const subtitle = document.querySelector(".hero__subtitle");
-  const swoosh = document.querySelector(".hero__swoosh");
+  const swooshes = document.querySelectorAll(".hero__swoosh");
   const doodleLeft = document.querySelector(".hero__doodle--left");
   const doodleRight = document.querySelector(".hero__doodle--right");
 
@@ -32,11 +32,11 @@ function initHero() {
     return; // elements visible by default
   }
 
-  gsap.set([wordmark, subtitle, swoosh], { opacity: 0, y: 30 });
+  gsap.set([wordmark, subtitle, ...swooshes], { opacity: 0, y: 30 });
 
   gsap
     .timeline()
-    .to(swoosh, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+    .to(swooshes, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
     .to(wordmark, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
     .to(subtitle, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3");
 
