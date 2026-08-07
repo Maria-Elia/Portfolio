@@ -1,0 +1,46 @@
+:root {
+  --pink-primary: #fc97d1;
+  --pink-soft: #ffaad2;
+  --pink-pale: #fcd8ff;
+  --pink-lightest: #fee9fb;
+  --purple-mid: #8560da;
+  --purple-deep: #a29bfd;
+  --purple-text: #5540a5;
+  --purple-night: #7b6ae0;
+  --blue-accent: #a9c1ff;
+  --yellow-soft: #ffe7a6;
+  --white: #ffffff;
+}
+
+/* ---- reset ---- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px; /* 1rem = 10px */
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--purple-text);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
