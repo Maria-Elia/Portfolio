@@ -285,3 +285,76 @@ ul {
 .sparkle--tr { top: -0.6rem; right: -0.6rem; }
 .sparkle--bl { bottom: -0.6rem; left: -0.6rem; }
 .sparkle--br { bottom: -0.6rem; right: -0.6rem; }
+
+/* ---- projects ---- */
+.projects {
+  padding: 8rem 0;
+  background: var(--white);
+}
+
+.projects__heading-block {
+  text-align: center;
+  padding: 0 4rem 4rem;
+}
+
+.projects__heading {
+  font-family: "Caveat", cursive;
+  font-size: 9rem;
+  color: var(--purple-mid);
+}
+
+.projects__tagline {
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  color: var(--purple-text);
+  margin-top: -1rem;
+}
+
+.projects__pill {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 3rem;
+  background: var(--yellow-soft);
+  color: var(--pink-primary);
+  font-family: "Righteous", sans-serif;
+  font-size: 3.6rem;
+  border-radius: 1rem;
+}
+
+.projects__intro {
+  max-width: 60rem;
+  margin: 2rem auto 0;
+  font-size: 1.8rem;
+  color: var(--purple-text);
+}
+
+.projects__cta {
+  display: flex;
+  width: fit-content;
+  margin: 4rem auto 0;
+}
+
+.marquee-row {
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.marquee-row__list {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+}
+
+.marquee-card {
+  width: 50rem;
+  height: 30rem;
+  border-radius: 1rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Righteous", sans-serif;
+  font-size: 2.4rem;
+  color: var(--white);
+  text-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+}
