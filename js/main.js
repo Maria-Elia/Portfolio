@@ -101,10 +101,7 @@ function initMarquee() {
   });
 }
 
-function initTwinkles() {
-  const container = document.querySelector(".contact__twinkles");
-  const count = 30;
-
+function scatterTwinkles(container, count) {
   for (let i = 0; i < count; i++) {
     const twinkle = document.createElement("span");
     twinkle.className = "twinkle";
@@ -113,6 +110,14 @@ function initTwinkles() {
     twinkle.style.animationDelay = `${Math.random() * 2.4}s`;
     container.appendChild(twinkle);
   }
+}
+
+function initTwinkles() {
+  scatterTwinkles(document.querySelector(".contact__twinkles"), 30);
+}
+
+function initHeroTwinkles() {
+  scatterTwinkles(document.querySelector(".hero__twinkles"), 20);
 }
 
 function initPreloader() {
@@ -130,6 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPreloader();
   initNav();
   initHero();
+  initHeroTwinkles();
   initAboutKeywords();
   initMarquee();
   initTwinkles();

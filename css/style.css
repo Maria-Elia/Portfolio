@@ -585,6 +585,12 @@ ul {
   }
 }
 
+.hero__twinkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
 /* ---- grain texture ---- */
 .grain-overlay {
   position: fixed;
