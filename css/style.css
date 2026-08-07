@@ -189,31 +189,31 @@ ul {
 }
 
 .hero__swoosh {
-  width: 40rem;
-  max-width: 80%;
-  filter: drop-shadow(0 0 0.8rem var(--yellow-soft));
+  width: 55rem;
+  max-width: 90%;
+  filter: drop-shadow(0 0 1.1rem var(--yellow-soft));
 }
 
 .hero__swoosh--bottom {
-  width: 36rem;
+  width: 50rem;
 }
 
 .hero__wordmark {
   font-family: "Fredoka", sans-serif;
   font-weight: 600;
-  font-size: 12rem;
+  font-size: 16rem;
   color: var(--pink-lightest);
-  letter-spacing: 1rem;
+  letter-spacing: 1.3rem;
   line-height: 1;
   text-shadow:
-    -0.2rem -0.2rem 0 var(--purple-text),
-    0.2rem -0.2rem 0 var(--purple-text),
-    -0.2rem 0.2rem 0 var(--purple-text),
-    0.2rem 0.2rem 0 var(--purple-text),
-    0 -0.2rem 0 var(--purple-text),
-    0 0.2rem 0 var(--purple-text),
-    -0.2rem 0 0 var(--purple-text),
-    0.2rem 0 0 var(--purple-text);
+    -0.3rem -0.3rem 0 var(--purple-text),
+    0.3rem -0.3rem 0 var(--purple-text),
+    -0.3rem 0.3rem 0 var(--purple-text),
+    0.3rem 0.3rem 0 var(--purple-text),
+    0 -0.3rem 0 var(--purple-text),
+    0 0.3rem 0 var(--purple-text),
+    -0.3rem 0 0 var(--purple-text),
+    0.3rem 0 0 var(--purple-text);
 }
 
 .hero__flanking-star {
