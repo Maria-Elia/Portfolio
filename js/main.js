@@ -61,7 +61,25 @@ function initHero() {
   });
 }
 
+function initAboutKeywords() {
+  const keywords = document.querySelectorAll('.keyword');
+
+  if (prefersReducedMotion) {
+    keywords.forEach((el) => el.classList.add('keyword--revealed'));
+    return;
+  }
+
+  keywords.forEach((el) => {
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 80%',
+      onEnter: () => el.classList.add('keyword--revealed'),
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNav();
   initHero();
+  initAboutKeywords();
 });

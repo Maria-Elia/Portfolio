@@ -216,6 +216,13 @@ ul {
   inset: 0;
   border-radius: 1rem;
   z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.keyword--revealed::before {
+  transform: scaleX(1);
 }
 
 .keyword[data-color="pink"]::before { background: var(--pink-primary); }
