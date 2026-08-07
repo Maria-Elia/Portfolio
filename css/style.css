@@ -153,6 +153,7 @@ ul {
 .hero__swoosh {
   width: 40rem;
   max-width: 80%;
+  filter: drop-shadow(0 0 0.8rem var(--yellow-soft));
 }
 
 .hero__wordmark {
@@ -286,6 +287,7 @@ ul {
   height: 1.4rem;
   background: var(--yellow-soft);
   clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  filter: drop-shadow(0 0 0.5rem var(--yellow-soft));
 }
 .sparkle--tl {
   top: -0.6rem;
