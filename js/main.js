@@ -78,8 +78,32 @@ function initAboutKeywords() {
   });
 }
 
+function initMarquee() {
+  if (prefersReducedMotion) {
+    return; // rows stay static
+  }
+
+  document.querySelectorAll(".marquee-row").forEach((row) => {
+    const list = row.querySelector(".marquee-row__list");
+    const direction = row.dataset.direction === "right" ? 1 : -1;
+    const distance = list.scrollWidth / 2; // list content is duplicated, so half its width is one full loop
+
+    gsap.fromTo(
+      list,
+      { x: direction === -1 ? 0 : -distance },
+      {
+        x: direction === -1 ? -distance : 0,
+        duration: 25,
+        ease: "none",
+        repeat: -1,
+      },
+    );
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNav();
   initHero();
   initAboutKeywords();
+  initMarquee();
 });
