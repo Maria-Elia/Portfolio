@@ -115,7 +115,19 @@ function initTwinkles() {
   }
 }
 
+function initPreloader() {
+  const preloader = document.querySelector(".preloader");
+  const delay = prefersReducedMotion ? 0 : 400;
+
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      preloader.classList.add("preloader--hidden");
+    }, delay);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  initPreloader();
   initNav();
   initHero();
   initAboutKeywords();
