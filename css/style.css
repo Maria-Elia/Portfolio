@@ -417,3 +417,40 @@ ul {
 .contact__social:hover svg {
   opacity: 0.7;
 }
+
+/* ---- footer ---- */
+.site-footer {
+  position: relative;
+  background: var(--purple-text);
+  padding-top: 4rem;
+}
+
+.site-footer__wave {
+  position: absolute;
+  top: -6rem;
+  left: 0;
+  width: 100%;
+  height: 6rem;
+}
+
+.site-footer__content {
+  text-align: center;
+  padding: 2rem 4rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.site-footer__wordmark {
+  font-family: "Fredoka", sans-serif;
+  font-size: 2.8rem;
+  color: var(--pink-lightest);
+}
+
+.site-footer__email,
+.site-footer__copyright {
+  color: var(--pink-lightest);
+  font-size: 1.4rem;
+  opacity: 0.85;
+}
