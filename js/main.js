@@ -23,25 +23,23 @@ function initNav() {
 
 function initHero() {
   const wordmark = document.querySelector(".hero__wordmark");
-  const subtitle = document.querySelector(".hero__subtitle");
   const swooshes = document.querySelectorAll(".hero__swoosh");
-  const doodleLeft = document.querySelector(".hero__doodle--left");
-  const doodleRight = document.querySelector(".hero__doodle--right");
+  const botanicalLeft = document.querySelector(".hero__botanical--left");
+  const botanicalRight = document.querySelector(".hero__botanical--right");
 
   if (prefersReducedMotion) {
     return; // elements visible by default
   }
 
-  gsap.set([wordmark, subtitle, ...swooshes], { opacity: 0, y: 30 });
+  gsap.set([wordmark, ...swooshes], { opacity: 0, y: 30 });
 
   gsap
     .timeline()
     .to(swooshes, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-    .to(wordmark, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-    .to(subtitle, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3");
+    .to(wordmark, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3");
 
-  gsap.to(doodleLeft, {
-    yPercent: 20,
+  gsap.to(botanicalLeft, {
+    yPercent: 8,
     scrollTrigger: {
       trigger: ".hero",
       start: "top top",
@@ -50,8 +48,8 @@ function initHero() {
     },
   });
 
-  gsap.to(doodleRight, {
-    yPercent: -20,
+  gsap.to(botanicalRight, {
+    yPercent: -8,
     scrollTrigger: {
       trigger: ".hero",
       start: "top top",
@@ -120,6 +118,23 @@ function initHeroTwinkles() {
   scatterTwinkles(document.querySelector(".hero__twinkles"), 20);
 }
 
+function initHeroStars() {
+  const container = document.querySelector(".hero__star-field");
+  const count = 9;
+
+  for (let i = 0; i < count; i++) {
+    const star = document.createElement("span");
+    star.className = "hero__mini-star";
+    const size = 1 + Math.random() * 1.4; // small to medium, in rem
+    star.style.width = `${size}rem`;
+    star.style.height = `${size}rem`;
+    star.style.top = `${Math.random() * 100}%`;
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.animationDelay = `${Math.random() * 3.6}s`;
+    container.appendChild(star);
+  }
+}
+
 function initPreloader() {
   const preloader = document.querySelector(".preloader");
   const delay = prefersReducedMotion ? 0 : 400;
@@ -136,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNav();
   initHero();
   initHeroTwinkles();
+  initHeroStars();
   initAboutKeywords();
   initMarquee();
   initTwinkles();

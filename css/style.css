@@ -137,8 +137,46 @@ ul {
   overflow: hidden;
 }
 
-.hero__doodle {
-  flex-shrink: 0;
+.hero__botanical {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 40rem;
+  max-width: 32%;
+  object-fit: contain;
+  object-position: top;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__botanical--left {
+  left: 0;
+  /* this source image's canvas is much wider than the actual art, and the
+     art itself sits roughly centered in that canvas (not at either edge),
+     so cover crops to that specific horizontal offset instead of "left" */
+  object-fit: cover;
+  object-position: 52% top;
+}
+
+.hero__botanical--right {
+  right: 0;
+  object-position: top right;
+  /* this source image has a hard, unintended edge baked into its alpha
+     channel partway across (not a soft illustrated silhouette), this mask
+     fades it into transparency as a stopgap until the asset is re-exported */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 45%);
+  mask-image: linear-gradient(to right, transparent 0%, black 45%);
+}
+
+.hero__cloud-vignette {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hero__content {
@@ -178,12 +216,42 @@ ul {
     0.2rem 0 0 var(--purple-text);
 }
 
-.hero__subtitle {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 0.4rem;
-  color: var(--purple-text);
+.hero__flanking-star {
+  position: absolute;
+  top: 42%;
+  width: 6rem;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 0 0.8rem var(--yellow-soft));
+  z-index: 1;
+}
+
+.hero__flanking-star--left {
+  left: 8%;
+}
+
+.hero__flanking-star--right {
+  right: 8%;
+}
+
+.hero__star-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero__mini-star {
+  position: absolute;
+  background: var(--yellow-soft);
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  filter: drop-shadow(0 0 0.4rem var(--yellow-soft));
+  animation: float 3.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__mini-star {
+    animation: none;
+  }
 }
 
 /* ---- about ---- */
