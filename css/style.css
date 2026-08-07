@@ -180,3 +180,78 @@ ul {
   letter-spacing: 0.4rem;
   color: var(--purple-text);
 }
+
+/* ---- about ---- */
+.about {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  padding: 8rem 4rem;
+  background: var(--pink-pale);
+}
+
+.about__inner {
+  flex: 1;
+}
+
+.about__text {
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 6rem;
+  letter-spacing: -0.096rem;
+  color: var(--purple-text);
+}
+
+.keyword {
+  position: relative;
+  display: inline-block;
+  padding: 0 2rem;
+  font-size: 4.3rem;
+  font-family: 'Righteous', sans-serif;
+}
+
+.keyword::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  z-index: -1;
+}
+
+.keyword[data-color="pink"]::before { background: var(--pink-primary); }
+.keyword[data-color="blue"]::before { background: var(--blue-accent); }
+.keyword[data-color="purple"]::before { background: var(--purple-deep); }
+
+.about__illustration {
+  flex: 1;
+  min-height: 40rem;
+}
+
+/* ---- shared pill button ---- */
+.btn-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3.2rem;
+  padding: 1.8rem 4.8rem;
+  border: 0.24rem solid var(--pink-lightest);
+  border-radius: 10rem;
+  background: linear-gradient(360deg, rgba(252, 151, 209, 0.6) 0%, rgba(165, 188, 255, 0.6) 100%);
+  color: var(--purple-text);
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.4rem;
+}
+
+.sparkle {
+  position: absolute;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: var(--yellow-soft);
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+}
+.sparkle--tl { top: -0.6rem; left: -0.6rem; }
+.sparkle--tr { top: -0.6rem; right: -0.6rem; }
+.sparkle--bl { bottom: -0.6rem; left: -0.6rem; }
+.sparkle--br { bottom: -0.6rem; right: -0.6rem; }

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maria Elia | CS Grad Student & Dev</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@500;600&family=Poppins:wght@400;700&family=Righteous&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@500;600&family=Poppins:wght@400;700&family=Righteous&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
   <header class="site-header">
@@ -27,13 +31,15 @@
   <main>
     <section id="hero" class="hero">
       <svg class="hero__doodle hero__doodle--left" width="140" height="420" viewBox="0 0 140 420" fill="none">
-        <path d="M20 20 Q 80 100 20 180 Q -20 260 40 340 Q 70 380 30 410" stroke="var(--purple-mid)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-        <path d="M60 60 Q 110 130 60 210" stroke="var(--pink-soft)" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+        <path d="M20 20 Q 80 100 20 180 Q -20 260 40 340 Q 70 380 30 410" stroke="var(--purple-mid)" stroke-width="2"
+          stroke-linecap="round" opacity="0.5" />
+        <path d="M60 60 Q 110 130 60 210" stroke="var(--pink-soft)" stroke-width="2" stroke-linecap="round"
+          opacity="0.4" />
       </svg>
 
       <div class="hero__content">
         <svg class="hero__swoosh" viewBox="0 0 500 80" fill="none">
-          <path d="M20 60 Q 250 -20 480 60" stroke="var(--yellow-soft)" stroke-width="6" stroke-linecap="round"/>
+          <path d="M20 60 Q 250 -20 480 60" stroke="var(--yellow-soft)" stroke-width="6" stroke-linecap="round" />
         </svg>
 
         <h1 class="hero__wordmark">MARIA</h1>
@@ -42,12 +48,36 @@
       </div>
 
       <svg class="hero__doodle hero__doodle--right" width="140" height="420" viewBox="0 0 140 420" fill="none">
-        <path d="M120 20 Q 60 100 120 180 Q 160 260 100 340 Q 70 380 110 410" stroke="var(--purple-mid)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-        <path d="M80 60 Q 30 130 80 210" stroke="var(--pink-soft)" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+        <path d="M120 20 Q 60 100 120 180 Q 160 260 100 340 Q 70 380 110 410" stroke="var(--purple-mid)"
+          stroke-width="2" stroke-linecap="round" opacity="0.5" />
+        <path d="M80 60 Q 30 130 80 210" stroke="var(--pink-soft)" stroke-width="2" stroke-linecap="round"
+          opacity="0.4" />
       </svg>
     </section>
 
     <section id="about" class="about">
+      <div class="about__inner">
+        <p class="about__text">
+          Studying Computer Science at RWTH Aachen. I love
+          <span class="keyword" data-color="blue">building</span>
+          something from scratch and watching it all come
+          <span class="keyword" data-color="purple">together</span>
+          in the end. Outside of code, you'll probably find me at a
+          <span class="keyword" data-color="pink">concert</span>
+          or elbow-deep in cookie dough.
+        </p>
+
+        <a href="#projects" class="about__cta btn-pill">
+          <span class="sparkle sparkle--tl"></span>
+          <span class="sparkle sparkle--tr"></span>
+          <span class="sparkle sparkle--bl"></span>
+          <span class="sparkle sparkle--br"></span>
+          MORE ABOUT ME
+        </a>
+      </div>
+
+      <div class="about__illustration">
+      </div>
     </section>
 
     <section id="projects" class="projects">
@@ -64,4 +94,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>
