@@ -44,3 +44,73 @@ a {
 ul {
   list-style: none;
 }
+
+/* ---- header / nav ---- */
+.nav-toggle {
+  position: fixed;
+  top: 2.4rem;
+  right: 2.4rem;
+  z-index: 100;
+  width: 5.6rem;
+  height: 5.6rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--pink-primary);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.nav-toggle span {
+  width: 2.2rem;
+  height: 0.2rem;
+  background: var(--white);
+  border-radius: 1rem;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-toggle--active span:nth-child(1) {
+  transform: translateY(0.7rem) rotate(45deg);
+}
+.nav-toggle--active span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle--active span:nth-child(3) {
+  transform: translateY(-0.7rem) rotate(-45deg);
+}
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: var(--purple-night);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.nav-overlay--open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-overlay__list {
+  text-align: center;
+}
+
+.nav-overlay__list li {
+  margin: 1.6rem 0;
+}
+
+.nav-overlay__list a {
+  font-family: 'Righteous', sans-serif;
+  font-size: 3.6rem;
+  color: var(--pink-lightest);
+  letter-spacing: 0.2rem;
+}
