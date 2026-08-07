@@ -183,15 +183,20 @@ ul {
 
 /* ---- about ---- */
 .about {
-  display: flex;
-  align-items: center;
-  gap: 4rem;
-  padding: 8rem 4rem;
+  position: relative;
   background: var(--pink-pale);
+  overflow: hidden;
 }
 
 .about__inner {
-  flex: 1;
+  position: absolute;
+  top: 6rem;
+  left: 5rem;
+  z-index: 2;
+  max-width: 55rem;
+  padding: 3.2rem;
+  border-radius: 2.4rem;
+  background: rgba(252, 216, 255, 0.88);
 }
 
 .about__text {
@@ -229,9 +234,27 @@ ul {
 .keyword[data-color="blue"]::before { background: var(--blue-accent); }
 .keyword[data-color="purple"]::before { background: var(--purple-deep); }
 
-.about__illustration {
-  flex: 1;
-  min-height: 40rem;
+.about__illustration-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.2rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__illustration-img {
+    animation: none;
+  }
 }
 
 /* ---- shared pill button ---- */
