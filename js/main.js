@@ -101,9 +101,24 @@ function initMarquee() {
   });
 }
 
+function initTwinkles() {
+  const container = document.querySelector(".contact__twinkles");
+  const count = 30;
+
+  for (let i = 0; i < count; i++) {
+    const twinkle = document.createElement("span");
+    twinkle.className = "twinkle";
+    twinkle.style.top = `${Math.random() * 100}%`;
+    twinkle.style.left = `${Math.random() * 100}%`;
+    twinkle.style.animationDelay = `${Math.random() * 2.4}s`;
+    container.appendChild(twinkle);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNav();
   initHero();
   initAboutKeywords();
   initMarquee();
+  initTwinkles();
 });
