@@ -523,3 +523,58 @@ ul {
     animation: none;
   }
 }
+
+/* ---- responsive ---- */
+@media (max-width: 1024px) {
+  html {
+    font-size: 8.5px;
+  }
+
+  .hero__doodle {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 7px;
+  }
+
+  .about__inner {
+    position: relative;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    margin-top: 2rem;
+  }
+
+  .about__text {
+    font-size: 3.6rem;
+  }
+
+  .marquee-card {
+    width: 32rem;
+    height: 20rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 6px;
+  }
+
+  .nav-toggle {
+    top: 1.6rem;
+    right: 1.6rem;
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+
+  .hero__wordmark {
+    letter-spacing: 0.2rem;
+  }
+
+  .contact__arc text {
+    font-size: 22px;
+  }
+}
