@@ -60,18 +60,18 @@ function initHero() {
 }
 
 function initAboutKeywords() {
-  const keywords = document.querySelectorAll('.keyword');
+  const keywords = document.querySelectorAll(".keyword");
 
   if (prefersReducedMotion) {
-    keywords.forEach((el) => el.classList.add('keyword--revealed'));
+    keywords.forEach((el) => el.classList.add("keyword--revealed"));
     return;
   }
 
   keywords.forEach((el) => {
     ScrollTrigger.create({
       trigger: el,
-      start: 'top 80%',
-      onEnter: () => el.classList.add('keyword--revealed'),
+      start: "top 80%",
+      onEnter: () => el.classList.add("keyword--revealed"),
     });
   });
 }
@@ -135,19 +135,40 @@ function initHeroStars() {
   }
 }
 
-function initPreloader() {
+function initPreloader(onHidden) {
   const preloader = document.querySelector(".preloader");
   const delay = prefersReducedMotion ? 0 : 400;
 
   window.addEventListener("load", () => {
     setTimeout(() => {
       preloader.classList.add("preloader--hidden");
+      onHidden();
     }, delay);
   });
 }
 
+function initCloudWipe() {
+  const wipe = document.querySelector(".cloud-wipe");
+  const back = wipe.querySelector(".cloud-wipe__layer--back");
+  const mid = wipe.querySelector(".cloud-wipe__layer--mid");
+  const front = wipe.querySelector(".cloud-wipe__layer--front");
+
+  if (prefersReducedMotion) {
+    wipe.remove();
+    return;
+  }
+
+  gsap.set([back, mid, front], { yPercent: 0 });
+
+  gsap
+    .timeline({ onComplete: () => wipe.remove() })
+    .to(back, { yPercent: 45, duration: 0.45, ease: "none" }) // back catches up to mid
+    .to([back, mid], { yPercent: "+=25", duration: 0.25, ease: "none" }) // back+mid catch up to front
+    .to([back, mid, front], { yPercent: "+=170", duration: 1.7, ease: "none" }); // all exit together, same constant speed
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  initPreloader();
+  initPreloader(initCloudWipe);
   initNav();
   initHero();
   initHeroTwinkles();

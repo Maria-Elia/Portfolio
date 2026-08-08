@@ -588,8 +588,8 @@ ul {
   justify-content: center;
   background: var(--pink-pale);
   transition:
-    opacity 0.4s ease,
-    visibility 0.4s ease;
+    opacity 0.7s ease,
+    visibility 0.7s ease;
 }
 
 .preloader--hidden {
@@ -622,6 +622,40 @@ ul {
   .preloader__spark {
     animation: none;
   }
+}
+
+/* ---- cloud wipe transition ---- */
+.cloud-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 150; /* above nav-toggle (100), below the preloader (200) it plays under */
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cloud-wipe__layer {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+  top: -50%;
+}
+
+.cloud-wipe__layer--back {
+  top: -62%;
+  opacity: 0.95;
+}
+
+.cloud-wipe__layer--mid {
+  top: -18%;
+  opacity: 0.97;
+}
+
+.cloud-wipe__layer--front {
+  top: 27%;
+  opacity: 0.9;
 }
 
 /* ---- responsive ---- */
