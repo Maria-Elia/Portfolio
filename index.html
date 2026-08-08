@@ -36,6 +36,8 @@
 
   <main>
     <section id="hero" class="hero">
+      <img src="assets/img/vortex.png" alt="" class="hero__vortex-texture">
+
       <img src="assets/img/clouds.png" alt="" class="hero__cloud-vignette">
 
       <div class="hero__twinkles"></div>
@@ -48,21 +50,23 @@
       </svg>
 
       <div class="hero__content">
-        <svg class="hero__swoosh" viewBox="0 0 500 80" fill="none">
-          <path d="M20 60 Q 250 -20 480 60" stroke="var(--yellow-soft)" stroke-width="6" stroke-linecap="round" />
-        </svg>
+        <div class="hero__title-group">
+          <svg class="hero__swoosh" viewBox="0 -38 500 98" fill="none">
+            <path d="M40,55 Q250,-30 460,55 Q250,-14 40,55 Z" fill="var(--yellow-soft)" />
+          </svg>
 
-        <h1 class="hero__wordmark">MARIA</h1>
+          <h1 class="hero__wordmark">MARIA</h1>
 
-        <svg class="hero__swoosh hero__swoosh--bottom" viewBox="0 0 500 120" fill="none">
-          <path d="M20 20 Q 250 100 480 20" stroke="var(--yellow-soft)" stroke-width="6" stroke-linecap="round" />
-          <path id="hero-subtitle-path" d="M20 42 Q 250 130 480 42" fill="none" stroke="none" />
-          <text font-family="Poppins" font-weight="700" font-size="21" fill="var(--white)" letter-spacing="4.2">
-            <textPath href="#hero-subtitle-path" startOffset="50%" text-anchor="middle">
-              CS GRAD STUDENT &amp; DEV
-            </textPath>
-          </text>
-        </svg>
+          <svg class="hero__swoosh hero__swoosh--bottom" viewBox="0 0 500 165" fill="none">
+            <path d="M40,20 Q250,112 460,20 Q250,92 40,20 Z" fill="var(--yellow-soft)" />
+            <path id="hero-subtitle-path" d="M5,75 Q250,157 495,75" fill="none" stroke="none" />
+            <text font-family="Poppins" font-weight="700" font-size="34" fill="var(--white)" letter-spacing="3">
+              <textPath href="#hero-subtitle-path" startOffset="50%" text-anchor="middle">
+                CS GRAD STUDENT &amp; DEV
+              </textPath>
+            </text>
+          </svg>
+        </div>
       </div>
 
       <svg class="hero__flanking-star hero__flanking-star--right" viewBox="0 0 100 100" fill="none">
