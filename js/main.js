@@ -25,7 +25,6 @@ function initHero() {
   const wordmark = document.querySelector(".hero__wordmark");
   const swooshes = document.querySelectorAll(".hero__swoosh");
   const botanicalLeft = document.querySelector(".hero__botanical--left");
-  const botanicalRight = document.querySelector(".hero__botanical--right");
 
   if (prefersReducedMotion) {
     return; // elements visible by default
@@ -40,16 +39,6 @@ function initHero() {
 
   gsap.to(botanicalLeft, {
     yPercent: 8,
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: true,
-    },
-  });
-
-  gsap.to(botanicalRight, {
-    yPercent: -8,
     scrollTrigger: {
       trigger: ".hero",
       start: "top top",
