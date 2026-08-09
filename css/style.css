@@ -141,26 +141,22 @@ ul {
   position: absolute;
   top: 0;
   height: 100%;
-  width: 40rem;
-  max-width: 32%;
+  width: 52vh;
+  max-width: 36vw;
   object-fit: contain;
-  object-position: top;
+  object-position: bottom;
   pointer-events: none;
   z-index: 0;
 }
 
 .hero__botanical--left {
   left: 0;
-  /* this source image's canvas is much wider than the actual art, and the
-     art itself sits roughly centered in that canvas (not at either edge),
-     so cover crops to that specific horizontal offset instead of "left" */
-  object-fit: cover;
-  object-position: 52% top;
+  object-position: bottom left;
 }
 
 .hero__botanical--right {
   right: 0;
-  object-position: top right;
+  object-position: bottom right;
   /* this source image has a hard, unintended edge baked into its alpha
      channel partway across (not a soft illustrated silhouette), this mask
      fades it into transparency as a stopgap until the asset is re-exported */
@@ -694,6 +690,10 @@ ul {
 @media (max-width: 768px) {
   html {
     font-size: 7px;
+  }
+
+  .hero__vortex-texture {
+    width: 220vw;
   }
 
   .about {

@@ -24,7 +24,6 @@ function initNav() {
 function initHero() {
   const wordmark = document.querySelector(".hero__wordmark");
   const swooshes = document.querySelectorAll(".hero__swoosh");
-  const botanicalLeft = document.querySelector(".hero__botanical--left");
 
   if (prefersReducedMotion) {
     return; // elements visible by default
@@ -36,16 +35,6 @@ function initHero() {
     .timeline()
     .to(swooshes, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
     .to(wordmark, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3");
-
-  gsap.to(botanicalLeft, {
-    yPercent: 8,
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: true,
-    },
-  });
 }
 
 function initAboutTitle() {
