@@ -136,27 +136,49 @@ ul {
   );
   overflow: hidden;
 }
+.hero {
+  --title-half: 332px;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    --title-half: 283px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    --title-half: 235px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    --title-half: 178px;
+  }
+}
 
 .hero__botanical {
   position: absolute;
   top: 0;
   height: 100%;
-  width: 52vh;
-  max-width: 36vw;
+  width: auto;
+  max-width: none;
   object-fit: contain;
-  object-position: bottom;
   pointer-events: none;
   z-index: 0;
+  --min-visible: 30vh;
+  --shift: max(0px, calc(51.7vh - max(var(--min-visible), calc(50vw - var(--title-half)))));
 }
 
 .hero__botanical--left {
   left: 0;
-  object-position: bottom left;
+  transform: translateX(calc(-1 * var(--shift)));
 }
 
 .hero__botanical--right {
   right: 0;
-  object-position: bottom right;
+  transform: translateX(var(--shift));
   /* this source image has a hard, unintended edge baked into its alpha
      channel partway across (not a soft illustrated silhouette), this mask
      fades it into transparency as a stopgap until the asset is re-exported */
