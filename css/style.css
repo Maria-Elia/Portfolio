@@ -698,6 +698,12 @@ ul {
   opacity: 0.9;
 }
 
+@media (max-width: 1024px) {
+  .cloud-wipe__layer {
+    object-position: 5% bottom;
+  }
+}
+
 /* ---- responsive ---- */
 @media (max-width: 1024px) {
   html {
