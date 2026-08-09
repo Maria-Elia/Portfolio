@@ -705,6 +705,7 @@ ul {
   .about__inner {
     max-width: 100%;
     margin: 2rem 0;
+    background: rgba(252, 216, 255, 0.55);
   }
 
   .about__text {
