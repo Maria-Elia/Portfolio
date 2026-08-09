@@ -48,6 +48,20 @@ function initHero() {
   });
 }
 
+function initAboutTitle() {
+  const title = document.querySelector(".about__title-img");
+
+  if (prefersReducedMotion) {
+    return; // visible by default
+  }
+
+  ScrollTrigger.create({
+    trigger: title,
+    start: "top 80%",
+    onEnter: () => title.classList.add("about__title-img--revealed"),
+  });
+}
+
 function initAboutKeywords() {
   const keywords = document.querySelectorAll(".keyword");
 
@@ -162,6 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initHero();
   initHeroTwinkles();
   initHeroStars();
+  initAboutTitle();
   initAboutKeywords();
   initMarquee();
   initTwinkles();
