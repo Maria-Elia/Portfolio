@@ -90,32 +90,46 @@ function initMarquee() {
     );
   });
 }
+function pickSpot(top, left, isClear) {
+  let topPct = 0;
+  let leftPct = 0;
 
-function scatterTwinkles(container, count) {
+  for (let attempt = 0; attempt < 40; attempt++) {
+    topPct = top[0] + Math.random() * (top[1] - top[0]);
+    leftPct = left[0] + Math.random() * (left[1] - left[0]);
+    if (!isClear || isClear(leftPct, topPct)) break;
+  }
+
+  return { topPct, leftPct };
+}
+
+function scatterTwinkles(container, count, isClear) {
   for (let i = 0; i < count; i++) {
     const twinkle = document.createElement("span");
     twinkle.className = "twinkle";
     const size = 0.4 + Math.random() * 0.6;
+    const spot = pickSpot([0, 100], [0, 100], isClear);
     twinkle.style.width = `${size}rem`;
     twinkle.style.height = `${size}rem`;
-    twinkle.style.top = `${Math.random() * 100}%`;
-    twinkle.style.left = `${Math.random() * 100}%`;
+    twinkle.style.top = `${spot.topPct}%`;
+    twinkle.style.left = `${spot.leftPct}%`;
     twinkle.style.animationDelay = `${Math.random() * 2.4}s`;
     container.appendChild(twinkle);
   }
 }
 function scatterStars(
   container,
-  { count, className, minSize, maxSize, top = [0, 100], left = [0, 100] },
+  { count, className, minSize, maxSize, top = [0, 100], left = [0, 100], isClear },
 ) {
   for (let i = 0; i < count; i++) {
     const star = document.createElement("span");
     star.className = className;
     const size = minSize + Math.random() * (maxSize - minSize); // in rem
+    const spot = pickSpot(top, left, isClear);
     star.style.width = `${size}rem`;
     star.style.height = `${size}rem`;
-    star.style.top = `${top[0] + Math.random() * (top[1] - top[0])}%`;
-    star.style.left = `${left[0] + Math.random() * (left[1] - left[0])}%`;
+    star.style.top = `${spot.topPct}%`;
+    star.style.left = `${spot.leftPct}%`;
     star.style.animationDelay = `${Math.random() * 3.6}s`;
     container.appendChild(star);
   }
@@ -137,13 +151,61 @@ function initHeroStars() {
     maxSize: 2.4,
   });
 }
+function buildPortraitClearTest() {
+  const img = document.querySelector(".about__illustration-img");
+  const sectionRect = document.querySelector(".about").getBoundingClientRect();
+  const imgRect = img.getBoundingClientRect();
+  let ctx;
+
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    ctx = canvas.getContext("2d", { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0);
+    ctx.getImageData(0, 0, 1, 1);
+  } catch {
+    return null;
+  }
+
+  return (leftPct, topPct) => {
+    const x = sectionRect.left + (sectionRect.width * leftPct) / 100;
+    const y = sectionRect.top + (sectionRect.height * topPct) / 100;
+    const px = Math.round(((x - imgRect.left) / imgRect.width) * ctx.canvas.width);
+    const py = Math.round(((y - imgRect.top) / imgRect.height) * ctx.canvas.height);
+
+    if (px < 0 || py < 0 || px >= ctx.canvas.width || py >= ctx.canvas.height) {
+      return true;
+    }
+
+    return ctx.getImageData(px, py, 1, 1).data[3] < 20;
+  };
+}
 
 function initAboutSparkles() {
+  const img = document.querySelector(".about__illustration-img");
+
+  if (!img.complete) {
+    img.addEventListener("load", initAboutSparkles, { once: true });
+    img.addEventListener("error", initAboutSparkles, { once: true });
+    return;
+  }
+
+  const isClear = img.naturalWidth ? buildPortraitClearTest() : null;
+
+  scatterTwinkles(document.querySelector(".about__twinkles"), 60, isClear);
   scatterStars(document.querySelector(".about__sparkles"), {
-    count: 22,
+    count: 40,
     className: "about__sparkle",
     minSize: 0.8,
     maxSize: 2.2,
+    isClear,
+  });
+  scatterStars(document.querySelector(".about__inner-sparkles"), {
+    count: 18,
+    className: "about__sparkle",
+    minSize: 0.6,
+    maxSize: 1.6,
   });
 }
 
