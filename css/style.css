@@ -267,6 +267,46 @@ ul {
   right: 26%;
 }
 
+.hero__big-star {
+  position: absolute;
+  filter: drop-shadow(0 0 0.8rem var(--yellow-soft));
+  animation: float 4.4s ease-in-out infinite;
+  z-index: 1;
+}
+
+.hero__big-star--one {
+  top: 15%;
+  left: 13%;
+  width: 4.6rem;
+}
+
+.hero__big-star--two {
+  top: 21%;
+  right: 15%;
+  width: 3.8rem;
+  animation-delay: 0.9s;
+}
+
+.hero__big-star--three {
+  top: 77%;
+  left: 19%;
+  width: 5.4rem;
+  animation-delay: 1.7s;
+}
+
+.hero__big-star--four {
+  top: 73%;
+  right: 21%;
+  width: 4.2rem;
+  animation-delay: 2.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__big-star {
+    animation: none;
+  }
+}
+
 .hero__star-field {
   position: absolute;
   inset: 0;
@@ -416,6 +456,72 @@ ul {
 @media (prefers-reduced-motion: reduce) {
   .about__illustration-img {
     animation: none;
+  }
+}
+
+.about__sparkles {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.about__big-star {
+  position: absolute;
+  z-index: 4;
+  filter: drop-shadow(0 0 0.8rem var(--yellow-soft));
+  animation: float 4.4s ease-in-out infinite;
+}
+
+.about__big-star--one {
+  top: calc(var(--cloud-drop) + 0.5vw);
+  left: 6%;
+  width: 6.4rem;
+  z-index: 6;
+}
+
+.about__big-star--two {
+  top: calc(var(--cloud-drop) + 4vw);
+  left: 28%;
+  width: 4.2rem;
+  animation-delay: 1s;
+}
+
+.about__big-star--three {
+  top: calc(var(--cloud-drop));
+  right: 24%;
+  width: 8rem;
+  animation-delay: 2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__big-star {
+    animation: none;
+  }
+}
+
+.about__sparkle {
+  position: absolute;
+  background: var(--white);
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  filter: drop-shadow(0 0 0.5rem var(--pink-soft));
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+
+.about__sparkle:nth-child(3n) {
+  background: var(--yellow-soft);
+  filter: drop-shadow(0 0 0.5rem var(--yellow-soft));
+}
+
+.about__sparkle:nth-child(4n) {
+  background: var(--purple-deep);
+  filter: drop-shadow(0 0 0.5rem var(--purple-deep));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__sparkle {
+    animation: none;
+    opacity: 0.7;
   }
 }
 

@@ -95,10 +95,29 @@ function scatterTwinkles(container, count) {
   for (let i = 0; i < count; i++) {
     const twinkle = document.createElement("span");
     twinkle.className = "twinkle";
+    const size = 0.4 + Math.random() * 0.6;
+    twinkle.style.width = `${size}rem`;
+    twinkle.style.height = `${size}rem`;
     twinkle.style.top = `${Math.random() * 100}%`;
     twinkle.style.left = `${Math.random() * 100}%`;
     twinkle.style.animationDelay = `${Math.random() * 2.4}s`;
     container.appendChild(twinkle);
+  }
+}
+function scatterStars(
+  container,
+  { count, className, minSize, maxSize, top = [0, 100], left = [0, 100] },
+) {
+  for (let i = 0; i < count; i++) {
+    const star = document.createElement("span");
+    star.className = className;
+    const size = minSize + Math.random() * (maxSize - minSize); // in rem
+    star.style.width = `${size}rem`;
+    star.style.height = `${size}rem`;
+    star.style.top = `${top[0] + Math.random() * (top[1] - top[0])}%`;
+    star.style.left = `${left[0] + Math.random() * (left[1] - left[0])}%`;
+    star.style.animationDelay = `${Math.random() * 3.6}s`;
+    container.appendChild(star);
   }
 }
 
@@ -107,24 +126,25 @@ function initTwinkles() {
 }
 
 function initHeroTwinkles() {
-  scatterTwinkles(document.querySelector(".hero__twinkles"), 20);
+  scatterTwinkles(document.querySelector(".hero__twinkles"), 44);
 }
 
 function initHeroStars() {
-  const container = document.querySelector(".hero__star-field");
-  const count = 9;
+  scatterStars(document.querySelector(".hero__star-field"), {
+    count: 18,
+    className: "hero__mini-star",
+    minSize: 0.7,
+    maxSize: 2.4,
+  });
+}
 
-  for (let i = 0; i < count; i++) {
-    const star = document.createElement("span");
-    star.className = "hero__mini-star";
-    const size = 1 + Math.random() * 1.4; // small to medium, in rem
-    star.style.width = `${size}rem`;
-    star.style.height = `${size}rem`;
-    star.style.top = `${Math.random() * 100}%`;
-    star.style.left = `${Math.random() * 100}%`;
-    star.style.animationDelay = `${Math.random() * 3.6}s`;
-    container.appendChild(star);
-  }
+function initAboutSparkles() {
+  scatterStars(document.querySelector(".about__sparkles"), {
+    count: 22,
+    className: "about__sparkle",
+    minSize: 0.8,
+    maxSize: 2.2,
+  });
 }
 
 function initPreloader(onHidden) {
@@ -167,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeroStars();
   initAboutTitle();
   initAboutKeywords();
+  initAboutSparkles();
   initMarquee();
   initTwinkles();
 });
