@@ -334,26 +334,46 @@ ul {
   position: relative;
   background: var(--pink-pale);
   overflow: clip;
-  overflow-clip-margin: 40vw;
+  overflow-clip-margin: 60vw;
   --cloud-drop: 12vw;
   --cloud-height: 44vw;
   --about-lead: calc(var(--cloud-drop) + 4rem);
   padding-top: var(--about-lead);
   min-height: calc(var(--about-lead) + 100vw / 2.015);
 }
-.about::before {
-  content: "";
+.about__clouds {
   position: absolute;
-  top: calc(var(--cloud-drop) - var(--cloud-height));
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.about__cloud {
+  position: absolute;
   left: -15%;
   right: -15%;
   height: var(--cloud-height);
   background: url("../assets/img/clouds.png") no-repeat center / 100% 100%;
-  opacity: 1;
   -webkit-mask-image: linear-gradient(to bottom, black 76%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 76%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
+  will-change: transform;
+}
+
+.about__cloud--front {
+  top: calc(var(--cloud-drop) - var(--cloud-height));
+}
+.about__cloud--mid {
+  top: calc(var(--cloud-drop) - var(--cloud-height) - 3vw);
+  left: -22%;
+  right: -12%;
+  opacity: 0.72;
+}
+
+.about__cloud--back {
+  top: calc(var(--cloud-drop) - var(--cloud-height) - 6vw);
+  left: -10%;
+  right: -24%;
+  opacity: 0.5;
 }
 
 .about__inner {
@@ -482,7 +502,6 @@ ul {
   z-index: 2;
   pointer-events: none;
 }
-
 .about__twinkles .twinkle {
   background: var(--purple-deep);
   filter: drop-shadow(0 0 0.3rem var(--white));

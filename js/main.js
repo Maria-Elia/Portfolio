@@ -131,6 +131,39 @@ function initMarquee() {
     },
   );
 }
+function initCloudParallax() {
+  if (prefersReducedMotion) {
+    return;
+  }
+
+  const vw = () => window.innerWidth / 100;
+
+  gsap.set(".about__cloud--back", { scaleX: -1 });
+  const layers = [
+    { selector: ".about__cloud--front", travel: 4 },
+    { selector: ".about__cloud--mid", travel: 2.4 },
+    { selector: ".about__cloud--back", travel: 1.1 },
+  ];
+
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".about",
+      start: "top bottom", // the boundary enters the viewport
+      end: "top top", // the boundary reaches the top
+      scrub: 0.6, // smooths the scroll input instead of tracking it frame-exact
+      invalidateOnRefresh: true, // re-measure the travel after a resize
+    },
+  });
+
+  layers.forEach(({ selector, travel }) => {
+    timeline.fromTo(
+      selector,
+      { y: () => -travel * vw() },
+      { y: () => travel * vw(), ease: "none" },
+      0,
+    );
+  });
+}
 function initSectionReveals() {
   if (prefersReducedMotion) {
     return; // everything is visible by default
@@ -314,6 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initAboutTitle();
   initAboutKeywords();
   initAboutSparkles();
+  initCloudParallax();
   initMarquee();
   initSectionReveals(); // after the about triggers, so they refresh in page order
   initTwinkles();
