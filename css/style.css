@@ -37,6 +37,10 @@ svg {
   display: block;
 }
 
+picture {
+  display: contents;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -354,6 +358,10 @@ ul {
   right: -15%;
   height: var(--cloud-height);
   background: url("../assets/img/clouds.png") no-repeat center / 100% 100%;
+  background-image: image-set(
+    url("../assets/img/clouds.webp") type("image/webp"),
+    url("../assets/img/clouds.png") type("image/png")
+  );
   -webkit-mask-image: linear-gradient(to bottom, black 76%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 76%, transparent 100%);
   will-change: transform;

@@ -21,9 +21,18 @@
   </div>
 
   <div class="cloud-wipe" aria-hidden="true">
-    <img src="assets/img/back.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--back">
-    <img src="assets/img/middle.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--mid">
-    <img src="assets/img/front.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--front">
+    <picture>
+      <source srcset="assets/img/back.webp" type="image/webp">
+      <img src="assets/img/back.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--back">
+    </picture>
+    <picture>
+      <source srcset="assets/img/middle.webp" type="image/webp">
+      <img src="assets/img/middle.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--mid">
+    </picture>
+    <picture>
+      <source srcset="assets/img/front.webp" type="image/webp">
+      <img src="assets/img/front.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--front">
+    </picture>
   </div>
 
   <header class="site-header">
@@ -42,12 +51,18 @@
 
   <main>
     <section id="hero" class="hero">
-      <img src="assets/img/vortex.png" alt="" class="hero__vortex-texture">
+      <picture>
+        <source srcset="assets/img/vortex.webp" type="image/webp">
+        <img src="assets/img/vortex.png" alt="" class="hero__vortex-texture">
+      </picture>
 
       <div class="hero__twinkles"></div>
       <div class="hero__star-field"></div>
 
-      <img src="assets/img/hero_left.png" alt="" class="hero__botanical hero__botanical--left">
+      <picture>
+        <source srcset="assets/img/hero_left.webp" type="image/webp">
+        <img src="assets/img/hero_left.png" alt="" class="hero__botanical hero__botanical--left">
+      </picture>
 
       <svg class="hero__flanking-star hero__flanking-star--left" viewBox="0 0 100 100" fill="none">
         <path d="M50,5 Q54,40 95,50 Q54,60 50,95 Q46,60 5,50 Q46,40 50,5 Z" fill="var(--yellow-soft)" />
@@ -77,7 +92,10 @@
         <path d="M50,5 Q54,40 95,50 Q54,60 50,95 Q46,60 5,50 Q46,40 50,5 Z" fill="var(--yellow-soft)" />
       </svg>
 
-      <img src="assets/img/hero_right.png" alt="" class="hero__botanical hero__botanical--right">
+      <picture>
+        <source srcset="assets/img/hero_right.webp" type="image/webp">
+        <img src="assets/img/hero_right.png" alt="" class="hero__botanical hero__botanical--right">
+      </picture>
 
       <svg class="hero__big-star hero__big-star--one" viewBox="0 0 100 100" fill="none" aria-hidden="true">
         <path d="M50,5 Q54,40 95,50 Q54,60 50,95 Q46,60 5,50 Q46,40 50,5 Z" fill="var(--yellow-soft)" />
@@ -119,14 +137,20 @@
         <path d="M50,5 Q54,40 95,50 Q54,60 50,95 Q46,60 5,50 Q46,40 50,5 Z" fill="var(--yellow-soft)" />
       </svg>
 
-      <img src="assets/img/about-illustration.png"
-        alt="Illustrated portrait of Maria, with a long sweeping wave of hair flowing beneath the text"
-        class="about__illustration-img">
+      <picture>
+        <source srcset="assets/img/about-illustration.webp" type="image/webp">
+        <img src="assets/img/about-illustration.png"
+          alt="Illustrated portrait of Maria, with a long sweeping wave of hair flowing beneath the text"
+          class="about__illustration-img">
+      </picture>
 
       <div class="about__inner">
         <div class="about__inner-sparkles" aria-hidden="true"></div>
 
-        <img src="assets/img/AboutMe.png" alt="About Me" class="about__title-img">
+        <picture>
+          <source srcset="assets/img/AboutMe.webp" type="image/webp">
+          <img src="assets/img/AboutMe.png" alt="About Me" class="about__title-img">
+        </picture>
 
         <p class="about__text">
           Studying Computer Science at RWTH Aachen. I love
