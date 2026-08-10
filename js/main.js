@@ -1,4 +1,4 @@
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -17,6 +17,24 @@ function initNav() {
       overlay.classList.remove("nav-overlay--open");
       toggle.classList.remove("nav-toggle--active");
       toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+function initAnchorScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const target = document.querySelector(link.getAttribute("href"));
+
+      if (!target) {
+        return;
+      }
+
+      event.preventDefault();
+      gsap.to(window, {
+        duration: prefersReducedMotion ? 0 : 0.9,
+        ease: "power2.inOut",
+        scrollTo: { y: target, autoKill: true }, // autoKill lets a manual scroll take over
+      });
     });
   });
 }
@@ -47,6 +65,7 @@ function initAboutTitle() {
   ScrollTrigger.create({
     trigger: title,
     start: "top 80%",
+    once: true,
     onEnter: () => title.classList.add("about__title-img--revealed"),
   });
 }
@@ -63,33 +82,75 @@ function initAboutKeywords() {
     ScrollTrigger.create({
       trigger: el,
       start: "top 80%",
+      once: true,
       onEnter: () => el.classList.add("keyword--revealed"),
     });
   });
 }
 
 function initMarquee() {
-  if (prefersReducedMotion) {
-    return; // rows stay static
-  }
-
+  //  hovering holds the row still
   document.querySelectorAll(".marquee-row").forEach((row) => {
     const list = row.querySelector(".marquee-row__list");
-    const direction = row.dataset.direction === "right" ? 1 : -1;
-    const distance = list.scrollWidth / 2; // list content is duplicated, so half its width is one full loop
+    const setPaused = (paused) => {
+      gsap.getTweensOf(list).forEach((tween) => (paused ? tween.pause() : tween.resume()));
+    };
 
-    gsap.fromTo(
-      list,
-      { x: direction === -1 ? 0 : -distance },
-      {
-        x: direction === -1 ? -distance : 0,
-        duration: 25,
-        ease: "none",
-        repeat: -1,
-      },
-    );
+    row.addEventListener("mouseenter", () => setPaused(true));
+    row.addEventListener("mouseleave", () => setPaused(false));
   });
+
+  gsap.matchMedia().add(
+    {
+      motionOK: "(prefers-reduced-motion: no-preference)",
+      isTablet: "(max-width: 1024px)",
+      isPhone: "(max-width: 768px)",
+      isSmallPhone: "(max-width: 480px)",
+    },
+    (context) => {
+      if (!context.conditions.motionOK) {
+        return; // rows stay static
+      }
+
+      document.querySelectorAll(".marquee-row").forEach((row) => {
+        const list = row.querySelector(".marquee-row__list");
+        const direction = row.dataset.direction === "right" ? 1 : -1;
+        const distance = list.scrollWidth / 2; // list content is duplicated, so half its width is one full loop
+
+        gsap.fromTo(
+          list,
+          { x: direction === -1 ? 0 : -distance },
+          {
+            x: direction === -1 ? -distance : 0,
+            duration: 25,
+            ease: "none",
+            repeat: -1,
+          },
+        );
+      });
+    },
+  );
 }
+function initSectionReveals() {
+  if (prefersReducedMotion) {
+    return; // everything is visible by default
+  }
+
+  const reveal = (targets, trigger) => {
+    gsap.from(targets, {
+      autoAlpha: 0,
+      y: 24,
+      duration: 0.6,
+      stagger: 0.08,
+      ease: "power2.out",
+      scrollTrigger: { trigger, start: "top 80%", once: true },
+    });
+  };
+
+  reveal(".projects__heading-block > *", ".projects__heading-block");
+  reveal([".contact__arc", ".contact__cta", ".contact__social"], ".contact");
+}
+
 function pickSpot(top, left, isClear) {
   let topPct = 0;
   let leftPct = 0;
@@ -214,6 +275,8 @@ function initPreloader(onHidden) {
   const delay = prefersReducedMotion ? 0 : 400;
 
   window.addEventListener("load", () => {
+    ScrollTrigger.refresh();
+
     setTimeout(() => {
       preloader.classList.add("preloader--hidden");
       onHidden();
@@ -244,6 +307,7 @@ function initCloudWipe() {
 document.addEventListener("DOMContentLoaded", () => {
   initPreloader(initCloudWipe);
   initNav();
+  initAnchorScroll();
   initHero();
   initHeroTwinkles();
   initHeroStars();
@@ -251,5 +315,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initAboutKeywords();
   initAboutSparkles();
   initMarquee();
+  initSectionReveals(); // after the about triggers, so they refresh in page order
   initTwinkles();
 });
