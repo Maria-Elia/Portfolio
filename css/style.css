@@ -862,8 +862,8 @@ ul {
 }
 
 .cloud-wipe__layer--front {
-  top: 27%;
-  opacity: 0.9;
+  top: 25%;
+  opacity: 1;
 }
 
 @media (max-width: 1024px) {
