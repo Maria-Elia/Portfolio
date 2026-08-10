@@ -187,17 +187,6 @@ ul {
   mask-image: linear-gradient(to right, transparent 0%, black 45%);
 }
 
-.hero__cloud-vignette {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  opacity: 0.7;
-  pointer-events: none;
-  z-index: 0;
-}
-
 .hero__content {
   position: relative;
   z-index: 1;
@@ -304,27 +293,31 @@ ul {
   position: relative;
   background: var(--pink-pale);
   overflow: clip;
-  overflow-clip-margin: 8vw;
-  min-height: calc(100vw / 2.015);
+  overflow-clip-margin: 40vw;
+  --cloud-drop: 12vw;
+  --cloud-height: 44vw;
+  --about-lead: calc(var(--cloud-drop) + 4rem);
+  padding-top: var(--about-lead);
+  min-height: calc(var(--about-lead) + 100vw / 2.015);
 }
-
 .about::before {
   content: "";
   position: absolute;
-  top: -4vw;
-  left: 0;
-  right: 0;
-  height: 37.9vw;
+  top: calc(var(--cloud-drop) - var(--cloud-height));
+  left: -15%;
+  right: -15%;
+  height: var(--cloud-height);
   background: url("../assets/img/clouds.png") no-repeat center / 100% 100%;
-  transform: scale(-1, -1);
-  opacity: 0.9;
+  opacity: 1;
+  -webkit-mask-image: linear-gradient(to bottom, black 76%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 76%, transparent 100%);
   pointer-events: none;
-  z-index: 3;
+  z-index: 2;
 }
 
 .about__inner {
   position: relative;
-  z-index: auto;
+  z-index: 4;
   max-width: min(70rem, calc(45.5vw - 80px));
   margin: 0rem 0 6rem 5rem;
   padding: 3.2rem;
@@ -401,10 +394,10 @@ ul {
 
 .about__illustration-img {
   position: absolute;
-  top: 50%;
+  top: calc(50% + var(--about-lead) / 2);
   transform: translateY(-50%);
   right: 0;
-  z-index: 0;
+  z-index: 3;
   width: 100%;
   height: auto;
   pointer-events: none;
