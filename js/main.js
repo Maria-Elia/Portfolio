@@ -164,6 +164,23 @@ function initCloudParallax() {
     );
   });
 }
+function initDecorGating() {
+  if (prefersReducedMotion) {
+    return;
+  }
+
+  document.querySelectorAll(".hero, .about, .contact").forEach((section) => {
+    section.classList.add("decor-idle");
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top bottom",
+      end: "bottom top",
+      onToggle: (self) => section.classList.toggle("decor-idle", !self.isActive),
+    });
+  });
+}
+
 function initSectionReveals() {
   if (prefersReducedMotion) {
     return; // everything is visible by default
@@ -341,6 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPreloader(initCloudWipe);
   initNav();
   initAnchorScroll();
+  initDecorGating(); // first, so its triggers refresh in page order
   initHero();
   initHeroTwinkles();
   initHeroStars();

@@ -504,17 +504,14 @@ ul {
 }
 .about__twinkles .twinkle {
   background: var(--purple-deep);
-  filter: drop-shadow(0 0 0.3rem var(--white));
 }
 
 .about__twinkles .twinkle:nth-child(2n) {
   background: var(--white);
-  filter: drop-shadow(0 0 0.3rem var(--purple-deep));
 }
 
 .about__twinkles .twinkle:nth-child(5n) {
   background: var(--yellow-soft);
-  filter: drop-shadow(0 0 0.3rem var(--yellow-soft));
 }
 
 .about__big-star {
@@ -1019,6 +1016,14 @@ ul {
   position: absolute;
   inset: 0;
   pointer-events: none;
+}
+.decor-idle .twinkle,
+.decor-idle .about__sparkle,
+.decor-idle .hero__mini-star,
+.decor-idle .hero__big-star,
+.decor-idle .about__big-star,
+.decor-idle .about__illustration-img {
+  animation-play-state: paused;
 }
 
 /* ---- grain texture ---- */
