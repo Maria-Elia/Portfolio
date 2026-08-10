@@ -28,7 +28,7 @@ body {
   font-family: "Poppins", sans-serif;
   color: var(--purple-text);
   background: var(--white);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img,
@@ -338,7 +338,7 @@ ul {
   position: relative;
   background: var(--pink-pale);
   overflow: clip;
-  overflow-clip-margin: 60vw;
+  overflow-clip-margin: 48vw;
   --cloud-drop: 12vw;
   --cloud-height: 44vw;
   --about-lead: calc(var(--cloud-drop) + 4rem);
@@ -347,7 +347,10 @@ ul {
 }
 .about__clouds {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
   z-index: 2;
   pointer-events: none;
 }
@@ -382,6 +385,38 @@ ul {
   left: -10%;
   right: -24%;
   opacity: 0.5;
+}
+@supports (animation-timeline: view()) {
+  .about__clouds {
+    view-timeline-name: --about-crossing;
+    view-timeline-axis: block;
+  }
+
+  .about__cloud {
+    animation: cloud-rise both cubic-bezier(0.77, 0, 0.175, 1);
+    animation-timeline: --about-crossing;
+    animation-range: cover 0% cover 100%;
+  }
+
+  .about__cloud--front {
+    --rise: 9vw;
+  }
+  .about__cloud--mid {
+    --rise: 5.5vw;
+  }
+  .about__cloud--back {
+    --rise: 2.5vw;
+    scale: -1 1;
+  }
+}
+
+@keyframes cloud-rise {
+  from {
+    translate: 0 var(--rise);
+  }
+  to {
+    translate: 0 calc(-1 * var(--rise));
+  }
 }
 
 .about__inner {

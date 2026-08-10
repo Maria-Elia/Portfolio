@@ -132,7 +132,7 @@ function initMarquee() {
   );
 }
 function initCloudParallax() {
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion || CSS.supports("animation-timeline", "view()")) {
     return;
   }
 
@@ -140,26 +140,26 @@ function initCloudParallax() {
 
   gsap.set(".about__cloud--back", { scaleX: -1 });
   const layers = [
-    { selector: ".about__cloud--front", travel: 4 },
-    { selector: ".about__cloud--mid", travel: 2.4 },
-    { selector: ".about__cloud--back", travel: 1.1 },
+    { selector: ".about__cloud--front", travel: 9 },
+    { selector: ".about__cloud--mid", travel: 5.5 },
+    { selector: ".about__cloud--back", travel: 2.5 },
   ];
 
   const timeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".about",
-      start: "top bottom", // the boundary enters the viewport
-      end: "top top", // the boundary reaches the top
-      scrub: 0.6, // smooths the scroll input instead of tracking it frame-exact
-      invalidateOnRefresh: true, // re-measure the travel after a resize
+      start: "top bottom",
+      end: "top top",
+      scrub: 0.35,
+      invalidateOnRefresh: true,
     },
   });
 
   layers.forEach(({ selector, travel }) => {
     timeline.fromTo(
       selector,
-      { y: () => -travel * vw() },
-      { y: () => travel * vw(), ease: "none" },
+      { y: () => travel * vw() },
+      { y: () => -travel * vw(), ease: "power2.inOut" },
       0,
     );
   });
