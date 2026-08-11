@@ -55,18 +55,50 @@ function initHero() {
     .to(wordmark, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3");
 }
 
+async function loadAboutTitleSvg() {
+  const mount = document.querySelector("[data-title-svg-mount]");
+
+  if (!mount) {
+    return;
+  }
+
+  const response = await fetch("assets/svg/about-title.svg");
+  mount.innerHTML = await response.text();
+}
+
 function initAboutTitle() {
   const title = document.querySelector(".about__title-img");
+  const paths = title ? title.querySelectorAll(".svg-title") : [];
+  const shadowPaths = title ? title.querySelectorAll(".svg-title-shadow") : [];
+
+  if (!title || !paths.length) {
+    return;
+  }
+
+  [...paths, ...shadowPaths].forEach((path) => {
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+  });
 
   if (prefersReducedMotion) {
-    return; // visible by default
+    return;
   }
 
   ScrollTrigger.create({
     trigger: title,
     start: "top 80%",
     once: true,
-    onEnter: () => title.classList.add("about__title-img--revealed"),
+    onEnter: () => {
+      const tweenOptions = {
+        strokeDashoffset: 0,
+        duration: 1.8,
+        ease: "power2.out",
+        stagger: 0.05,
+      };
+      gsap.to(paths, tweenOptions);
+      gsap.to(shadowPaths, tweenOptions);
+    },
   });
 }
 
@@ -354,7 +386,7 @@ function initCloudWipe() {
     .to([back, mid, front], { yPercent: "+=170", duration: 1.7, ease: "none" }); // all exit together, same constant speed
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   initPreloader(initCloudWipe);
   initNav();
   initAnchorScroll();
@@ -362,6 +394,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initHero();
   initHeroTwinkles();
   initHeroStars();
+  await loadAboutTitleSvg();
   initAboutTitle();
   initAboutKeywords();
   initAboutSparkles();

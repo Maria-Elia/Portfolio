@@ -282,6 +282,7 @@ ul {
   position: absolute;
   filter: drop-shadow(0 0 0.8rem var(--yellow-soft));
   animation: float 4.4s ease-in-out infinite;
+  will-change: translate;
   z-index: 1;
 }
 
@@ -331,6 +332,7 @@ ul {
   clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
   filter: drop-shadow(0 0 0.4rem var(--yellow-soft));
   animation: float 3.6s ease-in-out infinite;
+  will-change: translate;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -438,21 +440,96 @@ ul {
 .about__title-img {
   position: relative;
   z-index: 5;
-  display: block;
   width: 100%;
-  max-width: 38rem;
-  margin: -1.6rem auto -0.6rem;
-  clip-path: inset(0 100% 0 0);
+  max-width: 46rem;
+  margin: 0.8rem auto 4.4rem;
+  transform: rotate(-15deg) skew(-10deg);
 }
 
-.about__title-img--revealed {
-  clip-path: inset(0 0 0 0);
-  transition: clip-path 2.5s cubic-bezier(0.65, 0, 0.35, 1);
+.about__title-svg {
+  overflow: visible;
+  display: block;
+}
+
+.about__title-svg--about {
+  width: 100%;
+  transform: translateY(-5.5rem);
+}
+
+.about__title-svg--me {
+  position: absolute;
+  z-index: 1;
+  width: 46%;
+  right: 4%;
+  bottom: -22%;
+}
+.about__title-svg--about .svg-title-shadow-group {
+  transform: translate(0.5rem, 0.8rem);
+}
+
+.about__title-svg--me .svg-title-shadow-group {
+  transform: translate(0.36rem, 0.58rem);
+}
+
+.svg-title-shadow {
+  fill: none;
+  stroke: #eb9fde;
+  stroke-width: 22px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.svg-title {
+  fill: none;
+  stroke: var(--pink-soft);
+  stroke-width: 22px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.about__title-img::before,
+.about__title-img::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  background: var(--yellow-soft);
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  transform: rotate(15deg) skew(10deg);
+  animation: twinkle 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.about__title-img::before {
+  width: 4.4rem;
+  height: 5.3rem;
+  top: -4.4rem;
+  left: 2rem;
+}
+
+.about__title-img::after {
+  width: 2.2rem;
+  height: 3.2rem;
+  top: -1rem;
+  left: 0.6rem;
+  animation-delay: 0.3s;
+}
+
+.decor-idle .about__title-img::before,
+.decor-idle .about__title-img::after {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about__title-img {
-    clip-path: inset(0 0 0 0);
+  .svg-title,
+  .svg-title-shadow {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  .about__title-img::before,
+  .about__title-img::after {
+    animation: none;
+    opacity: 0.6;
   }
 }
 .about .btn-pill {
@@ -568,6 +645,7 @@ ul {
   z-index: 4;
   filter: drop-shadow(0 0 0.8rem var(--yellow-soft));
   animation: float 4.4s ease-in-out infinite;
+  will-change: translate;
 }
 
 .about__big-star--one {
