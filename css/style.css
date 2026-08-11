@@ -847,20 +847,108 @@ ul {
 /* ---- contact ---- */
 .contact {
   position: relative;
-  min-height: 50vh;
+  min-height: 78vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  padding: 6rem 4rem;
+  padding: 5rem 4rem 9rem;
   background: var(--purple-night);
   overflow: hidden;
 }
 
 .contact__arc {
-  width: 60rem;
-  max-width: 90%;
+  position: absolute;
+  top: -2.4rem;
+  left: 50%;
+  transform: translateX(calc(-50% + 3rem)) rotate(17deg);
+  width: 62rem;
+  max-width: 88%;
+  pointer-events: none;
+}
+
+.contact__title-img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 46rem;
+  margin: 3rem auto 4.4rem;
+  transform: translateX(3rem) rotate(-10deg) skew(-10deg);
+}
+
+.contact__title-svg {
+  overflow: visible;
+  display: block;
+}
+
+.contact__title-svg--lets {
+  width: 80%;
+  transform: translateX(-10rem);
+}
+
+.contact__title-svg--talk {
+  position: absolute;
+  z-index: 1;
+  width: 70%;
+  right: 2%;
+  bottom: -90%;
+}
+
+.contact__title-svg .svg-title {
+  stroke: #eb9fde;
+}
+
+.contact__title-svg .svg-title-shadow {
+  stroke: var(--purple-text);
+}
+
+.contact__title-svg--lets .svg-title-shadow-group {
+  transform: translate(0.5rem, 0.8rem);
+}
+
+.contact__title-svg--talk .svg-title-shadow-group {
+  transform: translate(0.42rem, 0.68rem);
+}
+
+.contact__title-img::before,
+.contact__title-img::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  background: var(--yellow-soft);
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  transform: rotate(15deg) skew(10deg);
+  animation: twinkle 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.contact__title-img::before {
+  width: 4.4rem;
+  height: 5.3rem;
+  top: -4.4rem;
+  left: 2rem;
+}
+
+.contact__title-img::after {
+  width: 2.2rem;
+  height: 3.2rem;
+  top: -1rem;
+  left: 0.6rem;
+  animation-delay: 0.3s;
+}
+
+.decor-idle .contact__title-img::before,
+.decor-idle .contact__title-img::after {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__title-img::before,
+  .contact__title-img::after {
+    animation: none;
+    opacity: 0.6;
+  }
 }
 
 .contact__twinkles {
@@ -1135,7 +1223,7 @@ ul {
   }
 
   .contact__arc text {
-    font-size: 22px;
+    font-size: 18px;
   }
 }
 

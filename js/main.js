@@ -55,23 +55,22 @@ function initHero() {
     .to(wordmark, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3");
 }
 
-async function loadAboutTitleSvg() {
-  const mount = document.querySelector("[data-title-svg-mount]");
+async function loadTitleSvg(mountName, url) {
+  const mount = document.querySelector(`[data-title-svg-mount="${mountName}"]`);
 
   if (!mount) {
     return;
   }
 
-  const response = await fetch("assets/svg/about-title.svg");
+  const response = await fetch(url);
   mount.innerHTML = await response.text();
 }
-
-function initAboutTitle() {
-  const title = document.querySelector(".about__title-img");
+function initDrawnTitle(title, triggerSelector) {
   const paths = title ? title.querySelectorAll(".svg-title") : [];
   const shadowPaths = title ? title.querySelectorAll(".svg-title-shadow") : [];
+  const trigger = title ? title.querySelector(triggerSelector) : null;
 
-  if (!title || !paths.length) {
+  if (!title || !trigger || !paths.length) {
     return;
   }
 
@@ -86,8 +85,8 @@ function initAboutTitle() {
   }
 
   ScrollTrigger.create({
-    trigger: title,
-    start: "top 80%",
+    trigger,
+    start: "top bottom",
     once: true,
     onEnter: () => {
       const tweenOptions = {
@@ -100,6 +99,14 @@ function initAboutTitle() {
       gsap.to(shadowPaths, tweenOptions);
     },
   });
+}
+
+function initAboutTitle() {
+  initDrawnTitle(document.querySelector(".about__title-img"), ".about__title-svg--about");
+}
+
+function initContactTitle() {
+  initDrawnTitle(document.querySelector(".contact__title-img"), ".contact__title-svg--lets");
 }
 
 function initAboutKeywords() {
@@ -394,12 +401,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   initHero();
   initHeroTwinkles();
   initHeroStars();
-  await loadAboutTitleSvg();
+  await Promise.all([
+    loadTitleSvg("about", "assets/svg/about-title.svg"),
+    loadTitleSvg("contact", "assets/svg/contact-title.svg"),
+  ]);
   initAboutTitle();
+  initContactTitle();
   initAboutKeywords();
   initAboutSparkles();
   initCloudParallax();
   initMarquee();
-  initSectionReveals(); // after the about triggers, so they refresh in page order
+  initSectionReveals(); // after the title triggers, so they refresh in page order
   initTwinkles();
 });
