@@ -404,6 +404,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   await Promise.all([
     loadTitleSvg("about", "assets/svg/about-title.svg"),
     loadTitleSvg("contact", "assets/svg/contact-title.svg"),
+    loadTitleSvg("cat-paw", "assets/svg/cat-paw.svg"),
   ]);
   initAboutTitle();
   initContactTitle();
