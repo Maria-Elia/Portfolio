@@ -237,7 +237,7 @@ function initSectionReveals() {
   };
 
   reveal(".projects__heading-block > *", ".projects__heading-block");
-  reveal([".contact__arc", ".contact__cta", ".contact__social"], ".contact");
+  reveal([".contact__arc", ".contact__flip-wrap"], ".contact");
 }
 
 function pickSpot(top, left, isClear) {
