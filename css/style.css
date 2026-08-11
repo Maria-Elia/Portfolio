@@ -132,15 +132,21 @@ ul {
   align-items: center;
   justify-content: space-between;
   padding: 0 4rem;
-  /* first layer settles the hero's own colour onto the about section's pink
-     before the boundary, so the two meet on the same colour. it is a background
-     layer rather than an overlay on top of the children, so the cloud vignette
-     still paints over it at full strength - washing the clouds out was what
-     made the seam read as a texture change landing on one straight row */
   background:
     linear-gradient(to bottom, rgba(252, 216, 255, 0) 68%, var(--pink-pale) 99%),
     linear-gradient(135deg, var(--pink-primary) 0%, var(--pink-soft) 35%, #beaaff 70%, #b7cbfe 100%);
   overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 26%;
+  background: linear-gradient(to bottom, rgba(252, 216, 255, 0) 0%, var(--pink-pale) 88%);
+  pointer-events: none;
 }
 .hero {
   --title-half: 332px;
