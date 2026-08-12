@@ -351,6 +351,7 @@ ul {
   --cloud-height: 44vw;
   --about-lead: calc(var(--cloud-drop) + 4rem);
   padding-top: var(--about-lead);
+  padding-bottom: 0.1px;
   min-height: calc(var(--about-lead) + 100vw / 2.015);
 }
 .about__clouds {
@@ -827,6 +828,31 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   height: 1rem;
   top: 0.8rem;
   left: -1.8rem;
+}
+
+/* ---- skills ---- */
+.skills {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(to bottom, var(--pink-pale) 0%, var(--white) 50%);
+  margin-top: -12vw;
+}
+
+.skills__bg {
+  width: 100%;
+  height: auto;
+}
+
+.skills::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--purple-night);
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  -webkit-mask: url("../assets/img/backgroundtop.png") no-repeat top / 100% auto;
+  mask: url("../assets/img/backgroundtop.png") no-repeat top / 100% auto;
+  mask-composite: intersect;
 }
 
 /* ---- projects ---- */
