@@ -838,21 +838,29 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   margin-top: -12vw;
 }
 
+.skills__layer {
+  position: relative;
+}
+
+.skills__layer--flip {
+  margin-top: -52.47%;
+  transform: scaleY(-1);
+}
+
 .skills__bg {
   width: 100%;
   height: auto;
+  display: block;
 }
 
-.skills::after {
-  content: "";
+.skills__tint {
   position: absolute;
   inset: 0;
   background: var(--purple-night);
   opacity: 0.5;
   mix-blend-mode: multiply;
-  -webkit-mask: url("../assets/img/backgroundtop.png") no-repeat top / 100% auto;
-  mask: url("../assets/img/backgroundtop.png") no-repeat top / 100% auto;
-  mask-composite: intersect;
+  -webkit-mask: url("../assets/img/backgroundtop.png") no-repeat top / 100% 100%;
+  mask: url("../assets/img/backgroundtop.png") no-repeat top / 100% 100%;
 }
 
 /* ---- projects ---- */
