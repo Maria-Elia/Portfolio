@@ -8,6 +8,9 @@
   --purple-text: #5540a5;
   --purple-night: #7b6ae0;
   --blue-accent: #a9c1ff;
+  --blue-text: #3d5cc4;
+  --teal-blue: #8fe3e0;
+  --teal-text: #0f7f88;
   --yellow-soft: #ffe7a6;
   --white: #ffffff;
 }
@@ -528,7 +531,9 @@ ul {
   }
 
   .about__title-img::before,
-  .about__title-img::after {
+  .about__title-img::after,
+  .skills__title-img::before,
+  .skills__title-img::after {
     animation: none;
     opacity: 0.6;
   }
@@ -863,6 +868,256 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   mask: url("../assets/img/backgroundtop.png") no-repeat top / 100% 100%;
 }
 
+.skills__twinkles {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.skills__big-star {
+  position: absolute;
+  z-index: 3;
+  filter: drop-shadow(0 0 0.8rem var(--yellow-soft));
+  animation: float 4.4s ease-in-out infinite;
+  will-change: translate;
+}
+
+.skills__big-star--one {
+  top: 8%;
+  left: 8%;
+  width: 5.6rem;
+}
+
+.skills__big-star--two {
+  top: 14%;
+  right: 42%;
+  width: 3.6rem;
+  animation-delay: 1.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills__big-star {
+    animation: none;
+  }
+}
+
+.skills__inner {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  top: 22%;
+  bottom: 12%;
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 4rem;
+  overflow: visible;
+}
+
+.skills__title-img {
+  position: absolute;
+  z-index: 5;
+  top: 40rem;
+  right: 5rem;
+  width: clamp(20.25rem, 32.4vw, 64.8rem);
+  overflow: visible;
+  transform: rotate(11deg) skew(13deg);
+}
+
+.skills__title-svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.skills-title-fill {
+  fill: #eb9fde;
+  color: #eb9fde;
+}
+
+.skills-title-shadow {
+  fill: var(--purple-text);
+  color: var(--purple-text);
+  translate: 0.4rem 0.2rem;
+}
+
+.skills__title-img::before,
+.skills__title-img::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  background: var(--yellow-soft);
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  transform: rotate(15deg) skew(10deg);
+  animation: twinkle 2.4s ease-in-out infinite;
+  filter: drop-shadow(0 0 0.8rem var(--yellow-soft));
+  pointer-events: none;
+}
+
+.skills__title-img::before {
+  width: 4.4rem;
+  height: 5.3rem;
+  top: -1%;
+  right: 10%;
+}
+
+.skills__title-img::after {
+  width: 2.2rem;
+  height: 3.2rem;
+  top: 10%;
+  right: 4%;
+  animation-delay: 0.3s;
+}
+
+.decor-idle .skills__title-img::before,
+.decor-idle .skills__title-img::after {
+  animation-play-state: paused;
+}
+
+.skills__constellations {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  margin-top: 32rem;
+}
+
+.skills__constellation {
+  position: absolute;
+}
+
+.skills__constellation[data-cat="languages"] {
+  top: -14%;
+  left: 2%;
+  width: min(40vw, 48rem);
+}
+
+.skills__constellation[data-cat="frameworks"] {
+  top: 6%;
+  left: 60%;
+  width: min(36vw, 42rem);
+}
+
+.skills__constellation[data-cat="tools"] {
+  top: 20%;
+  left: 0%;
+  width: min(40vw, 48rem);
+}
+
+.skills__constellation[data-cat="ai"] {
+  top: 36%;
+  left: 66%;
+  width: min(30vw, 34rem);
+}
+
+.skills__constellation-label {
+  display: block;
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: 3.2rem;
+  color: var(--purple-text);
+  text-shadow:
+    0.1rem 0 var(--white),
+    -0.1rem 0 var(--white),
+    0 0.1rem var(--white),
+    0 -0.1rem var(--white),
+    0.1rem 0.1rem var(--white),
+    -0.1rem -0.1rem var(--white),
+    0.1rem -0.1rem var(--white),
+    -0.1rem 0.1rem var(--white);
+  margin-bottom: 0.1rem;
+}
+
+.skills__constellation-name {
+  display: block;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cat-name-color);
+  opacity: 0.85;
+  text-shadow:
+    0.1rem 0 var(--white),
+    -0.1rem 0 var(--white),
+    0 0.1rem var(--white),
+    0 -0.1rem var(--white),
+    0.1rem 0.1rem var(--white),
+    -0.1rem -0.1rem var(--white),
+    0.1rem -0.1rem var(--white),
+    -0.1rem 0.1rem var(--white);
+  margin-bottom: 0.7rem;
+}
+
+.skills__constellation-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.skills__constellation-line {
+  stroke: var(--cat-color);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+.skills__star-mark {
+  fill: var(--cat-color);
+  filter: drop-shadow(0 0 0.5rem var(--cat-color));
+  transform: scale(0.3);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: skills-star-twinkle 2.6s ease-in-out infinite;
+}
+
+.skills__star-label {
+  font-family: "Fredoka", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  fill: var(--purple-text);
+  stroke: var(--white);
+  stroke-width: 4px;
+  paint-order: stroke fill;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .skills__star:hover .skills__star-mark {
+    transform: scale(0.38);
+  }
+}
+
+@media (max-width: 1024px) {
+  .skills__inner {
+    position: static;
+    padding: 15rem 2.4rem 8rem;
+  }
+
+  .skills__title-img {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: clamp(11.34rem, 34.02vw, 17.82rem);
+    transform: rotate(4deg) skew(6deg);
+  }
+
+  .skills__constellations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    margin-top: 0;
+  }
+
+  .skills__constellation {
+    position: static;
+    width: min(80vw, 34rem);
+  }
+}
+
 /* ---- projects ---- */
 .projects {
   padding: 8rem 0;
@@ -1152,10 +1407,27 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   }
 }
 
+@keyframes skills-star-twinkle {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .twinkle {
     animation: none;
     opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills__star-mark {
+    animation: none;
+    opacity: 0.85;
   }
 }
 
@@ -1403,6 +1675,8 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
 .decor-idle .hero__mini-star,
 .decor-idle .hero__big-star,
 .decor-idle .about__big-star,
+.decor-idle .skills__big-star,
+.decor-idle .skills__star-mark,
 .decor-idle .about__illustration-img {
   animation-play-state: paused;
 }

@@ -109,6 +109,236 @@ function initContactTitle() {
   initDrawnTitle(document.querySelector(".contact__title-img"), ".contact__title-svg--lets");
 }
 
+function initSkillsTitle() {
+  const title = document.querySelector(".skills__title-img");
+
+  if (!title) {
+    return;
+  }
+
+  const slant = 16;
+
+  const setClip = (v) => {
+    const rightTop = -slant + v * (100 + slant * 2);
+    const rightBottom = rightTop - slant;
+    title.style.clipPath = `polygon(0% 0%, ${rightTop}% 0%, ${rightBottom}% 100%, 0% 100%)`;
+  };
+
+  if (prefersReducedMotion) {
+    title.style.clipPath = "none";
+    return;
+  }
+
+  setClip(0);
+
+  ScrollTrigger.create({
+    trigger: title,
+    start: "top bottom",
+    once: true,
+    onEnter: () => {
+      gsap.to(
+        { v: 0 },
+        {
+          v: 1,
+          duration: 3.2,
+          ease: "power2.inOut",
+          onUpdate() {
+            setClip(this.targets()[0].v);
+          },
+        },
+      );
+    },
+  });
+}
+
+const STAR_PATH_D = "M50,5 Q54,40 95,50 Q54,60 50,95 Q46,60 5,50 Q46,40 50,5 Z";
+
+const SKILLS_DATA = [
+  {
+    cat: "languages",
+    label: "Languages",
+    constellation: "Auriga",
+    color: "var(--pink-primary)",
+    skills: ["JavaScript", "TypeScript", "Python", "Java", "HTML", "CSS"],
+  },
+  {
+    cat: "frameworks",
+    label: "Frameworks & Engines",
+    constellation: "Corvus",
+    color: "var(--blue-accent)",
+    nameColor: "var(--blue-text)",
+    skills: ["React", "Node.js", "GSAP", "Unity"],
+  },
+  {
+    cat: "tools",
+    label: "Data & Dev Tools",
+    constellation: "Cygnus",
+    color: "var(--teal-blue)",
+    nameColor: "var(--teal-text)",
+    skills: ["MongoDB", "MariaDB", "PostgreSQL", "Git", "VS Code", "Docker"],
+  },
+  {
+    cat: "ai",
+    label: "AI Tools",
+    constellation: "Triangulum",
+    color: "var(--purple-mid)",
+    skills: ["Claude", "ChatGPT", "GitHub Copilot"],
+  },
+];
+const CONSTELLATION_TEMPLATES = {
+  // Triangulum
+  ai: {
+    viewBox: "0 0 260 130",
+    points: [
+      { x: 35, y: 100 },
+      { x: 150, y: 15 },
+      { x: 225, y: 90 },
+    ],
+    edges: [
+      [0, 1],
+      [1, 2],
+      [2, 0],
+    ],
+  },
+  // Corvus (the Crow)
+  frameworks: {
+    viewBox: "0 0 300 130",
+    points: [
+      { x: 60, y: 105 },
+      { x: 90, y: 25 },
+      { x: 230, y: 15 },
+      { x: 250, y: 95 },
+    ],
+    edges: [
+      [0, 1],
+      [1, 2],
+      [2, 3],
+      [3, 0],
+    ],
+  },
+  // Auriga
+  languages: {
+    viewBox: "0 0 360 170",
+    points: [
+      { x: 55, y: 130 },
+      { x: 35, y: 55 },
+      { x: 130, y: 15 },
+      { x: 255, y: 20 },
+      { x: 325, y: 75 },
+      { x: 240, y: 150 },
+    ],
+    edges: [
+      [0, 1],
+      [1, 2],
+      [2, 3],
+      [3, 4],
+      [4, 5],
+      [5, 0],
+    ],
+  },
+  // Cygnus
+  tools: {
+    viewBox: "0 0 360 170",
+    points: [
+      { x: 180, y: 15 },
+      { x: 180, y: 60 },
+      { x: 70, y: 75 },
+      { x: 200, y: 90 },
+      { x: 300, y: 70 },
+      { x: 165, y: 155 },
+    ],
+    edges: [
+      [0, 1],
+      [1, 3],
+      [3, 2],
+      [3, 4],
+      [3, 5],
+    ],
+  },
+};
+
+function buildConstellationSvg(template, skills) {
+  const svgNS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNS, "svg");
+  svg.setAttribute("viewBox", template.viewBox);
+  svg.setAttribute("aria-hidden", "true");
+  svg.classList.add("skills__constellation-svg");
+
+  const points = template.points;
+  const edges = template.edges || points.map((_, i) => [i, i + 1]).slice(0, -1);
+
+  const lineGroup = document.createElementNS(svgNS, "g");
+  lineGroup.classList.add("skills__constellation-lines");
+  edges.forEach(([a, b]) => {
+    const line = document.createElementNS(svgNS, "line");
+    line.setAttribute("x1", points[a].x);
+    line.setAttribute("y1", points[a].y);
+    line.setAttribute("x2", points[b].x);
+    line.setAttribute("y2", points[b].y);
+    line.classList.add("skills__constellation-line");
+    lineGroup.appendChild(line);
+  });
+  svg.appendChild(lineGroup);
+
+  points.forEach((point, i) => {
+    const star = document.createElementNS(svgNS, "g");
+    star.classList.add("skills__star");
+    star.setAttribute("transform", `translate(${point.x - 50}, ${point.y - 50})`);
+
+    const mark = document.createElementNS(svgNS, "path");
+    mark.setAttribute("d", STAR_PATH_D);
+    mark.classList.add("skills__star-mark");
+    mark.style.animationDelay = `${(Math.random() * 2.4).toFixed(2)}s`;
+    star.appendChild(mark);
+    svg.appendChild(star);
+
+    const label = document.createElementNS(svgNS, "text");
+    label.classList.add("skills__star-label");
+    label.setAttribute("x", point.x + 10);
+    label.setAttribute("y", point.y + 4);
+    label.textContent = skills[i];
+    svg.appendChild(label);
+  });
+
+  return svg;
+}
+
+function buildConstellations() {
+  SKILLS_DATA.forEach((entry) => {
+    const mount = document.querySelector(`.skills__constellation[data-cat="${entry.cat}"]`);
+
+    if (!mount) {
+      return;
+    }
+
+    const template = CONSTELLATION_TEMPLATES[entry.cat];
+
+    if (!template) {
+      console.warn(`No constellation template for ${entry.cat}`);
+      return;
+    }
+
+    mount.style.setProperty("--cat-color", entry.color);
+    mount.style.setProperty("--cat-name-color", entry.nameColor || entry.color);
+
+    const caption = document.createElement("span");
+    caption.className = "skills__constellation-label";
+    caption.setAttribute("aria-hidden", "true");
+    caption.textContent = entry.label;
+    mount.appendChild(caption);
+
+    if (entry.constellation) {
+      const name = document.createElement("span");
+      name.className = "skills__constellation-name";
+      name.setAttribute("aria-hidden", "true");
+      name.textContent = entry.constellation;
+      mount.appendChild(name);
+    }
+
+    mount.appendChild(buildConstellationSvg(template, entry.skills));
+  });
+}
+
 function initAboutKeywords() {
   const keywords = document.querySelectorAll(".keyword");
 
@@ -203,12 +433,76 @@ function initCloudParallax() {
     );
   });
 }
+function initSkillsParallax() {
+  if (prefersReducedMotion) {
+    return;
+  }
+
+  const vw = () => window.innerWidth / 100;
+
+  gsap.to(".skills__big-star--one", {
+    y: () => -8 * vw(),
+    ease: "none",
+    scrollTrigger: { trigger: ".skills", start: "top bottom", end: "bottom top", scrub: 0.4 },
+  });
+  gsap.to(".skills__big-star--two", {
+    y: () => 12 * vw(),
+    ease: "none",
+    scrollTrigger: { trigger: ".skills", start: "top bottom", end: "bottom top", scrub: 0.6 },
+  });
+}
+
+function initSkillsConstellations() {
+  if (prefersReducedMotion) {
+    return;
+  }
+
+  document.querySelectorAll(".skills__constellation").forEach((cluster) => {
+    const lines = cluster.querySelectorAll(".skills__constellation-line");
+    const stars = cluster.querySelectorAll(".skills__star");
+    const labels = cluster.querySelectorAll(".skills__star-label");
+    const caption = cluster.querySelector(".skills__constellation-label");
+
+    lines.forEach((line) => {
+      const length = line.getTotalLength();
+      line.style.strokeDasharray = length;
+      line.style.strokeDashoffset = length;
+    });
+
+    gsap.set(stars, { autoAlpha: 0 });
+    gsap.set(labels, { autoAlpha: 0, y: 6 });
+    gsap.set(caption, { autoAlpha: 0, y: 6 });
+
+    ScrollTrigger.create({
+      trigger: cluster,
+      start: "top bottom",
+      once: true,
+      onEnter: () => {
+        gsap
+          .timeline()
+          .to(caption, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" })
+          .to(
+            lines,
+            { strokeDashoffset: 0, duration: 0.8, stagger: 0.15, ease: "power2.out" },
+            "-=0.2",
+          )
+          .to(stars, { autoAlpha: 1, duration: 0.4, stagger: 0.1, ease: "power2.out" }, "-=0.6")
+          .to(
+            labels,
+            { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.1, ease: "power2.out" },
+            "-=0.5",
+          );
+      },
+    });
+  });
+}
+
 function initDecorGating() {
   if (prefersReducedMotion) {
     return;
   }
 
-  document.querySelectorAll(".hero, .about, .contact").forEach((section) => {
+  document.querySelectorAll(".hero, .about, .skills, .contact").forEach((section) => {
     section.classList.add("decor-idle");
 
     ScrollTrigger.create({
@@ -287,6 +581,7 @@ function scatterStars(
 
 function initTwinkles() {
   scatterTwinkles(document.querySelector(".contact__twinkles"), 30);
+  scatterTwinkles(document.querySelector(".skills__twinkles"), 26);
 }
 
 function initHeroTwinkles() {
@@ -401,16 +696,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   initHero();
   initHeroTwinkles();
   initHeroStars();
+  buildConstellations();
   await Promise.all([
     loadTitleSvg("about", "assets/svg/about-title.svg"),
     loadTitleSvg("contact", "assets/svg/contact-title.svg"),
     loadTitleSvg("cat-paw", "assets/svg/cat-paw.svg"),
+    loadTitleSvg("skills", "assets/svg/skills-title-cropped.svg"),
   ]);
   initAboutTitle();
+  initSkillsTitle();
   initContactTitle();
   initAboutKeywords();
   initAboutSparkles();
   initCloudParallax();
+  initSkillsParallax();
+  initSkillsConstellations();
   initMarquee();
   initSectionReveals(); // after the title triggers, so they refresh in page order
   initTwinkles();
