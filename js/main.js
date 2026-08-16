@@ -192,7 +192,7 @@ const CONSTELLATION_TEMPLATES = {
     points: [
       { x: 35, y: 100 },
       { x: 150, y: 15 },
-      { x: 225, y: 90 },
+      { x: 105, y: 135 },
     ],
     edges: [
       [0, 1],
@@ -207,7 +207,7 @@ const CONSTELLATION_TEMPLATES = {
       { x: 60, y: 105 },
       { x: 90, y: 25 },
       { x: 230, y: 15 },
-      { x: 250, y: 95 },
+      { x: 205, y: 100 },
     ],
     edges: [
       [0, 1],
@@ -221,9 +221,9 @@ const CONSTELLATION_TEMPLATES = {
     viewBox: "0 0 360 170",
     points: [
       { x: 55, y: 130 },
-      { x: 35, y: 55 },
-      { x: 130, y: 15 },
-      { x: 255, y: 20 },
+      { x: 25, y: 75 },
+      { x: 145, y: 10 },
+      { x: 270, y: 10 },
       { x: 325, y: 75 },
       { x: 240, y: 150 },
     ],
@@ -238,14 +238,14 @@ const CONSTELLATION_TEMPLATES = {
   },
   // Cygnus
   tools: {
-    viewBox: "0 0 360 170",
+    viewBox: "0 0 360 260",
     points: [
-      { x: 180, y: 15 },
-      { x: 180, y: 60 },
-      { x: 70, y: 75 },
-      { x: 200, y: 90 },
-      { x: 300, y: 70 },
-      { x: 165, y: 155 },
+      { x: 200, y: 15 },
+      { x: 245, y: 60 },
+      { x: 30, y: 110 },
+      { x: 230, y: 140 },
+      { x: 350, y: 120 },
+      { x: 195, y: 235 },
     ],
     edges: [
       [0, 1],
