@@ -188,11 +188,11 @@ const SKILLS_DATA = [
 const CONSTELLATION_TEMPLATES = {
   // Triangulum
   ai: {
-    viewBox: "0 0 260 130",
+    viewBox: "0 0 280 150",
     points: [
-      { x: 35, y: 100 },
-      { x: 150, y: 15 },
-      { x: 105, y: 135 },
+      { x: 40, y: 95 },
+      { x: 160, y: 15 },
+      { x: 110, y: 140 },
     ],
     edges: [
       [0, 1],
@@ -266,6 +266,7 @@ function buildConstellationSvg(template, skills) {
 
   const points = template.points;
   const edges = template.edges || points.map((_, i) => [i, i + 1]).slice(0, -1);
+  const viewBoxWidth = Number(template.viewBox.split(" ")[2]);
 
   const lineGroup = document.createElementNS(svgNS, "g");
   lineGroup.classList.add("skills__constellation-lines");
@@ -292,15 +293,127 @@ function buildConstellationSvg(template, skills) {
     star.appendChild(mark);
     svg.appendChild(star);
 
+    const roomRight = viewBoxWidth - (point.x + 10) - LABEL_EDGE_MARGIN;
+    const roomLeft = point.x - 10 - LABEL_EDGE_MARGIN;
+    const anchorLeft = roomRight < roomLeft;
+
     const label = document.createElementNS(svgNS, "text");
     label.classList.add("skills__star-label");
-    label.setAttribute("x", point.x + 10);
+    label.setAttribute("x", anchorLeft ? point.x - 10 : point.x + 10);
     label.setAttribute("y", point.y + 4);
+    if (anchorLeft) {
+      label.setAttribute("text-anchor", "end");
+    }
     label.textContent = skills[i];
+    label.dataset.maxWidth = Math.max(anchorLeft ? roomLeft : roomRight, LABEL_EDGE_MARGIN);
     svg.appendChild(label);
   });
 
   return svg;
+}
+
+const LABEL_EDGE_MARGIN = 6;
+
+const LABEL_MIN_FONT_PX = 9;
+const LABEL_COLLISION_PAD = 2;
+const LABEL_SHRINK_STEP = 0.92;
+function fitLabelToEdge(label) {
+  label.removeAttribute("textLength");
+  label.removeAttribute("lengthAdjust");
+  const maxWidth = Number(label.dataset.maxWidth);
+  const natural = label.getComputedTextLength();
+  if (natural > maxWidth) {
+    label.setAttribute("textLength", maxWidth);
+    label.setAttribute("lengthAdjust", "spacingAndGlyphs");
+  }
+}
+
+function labelsOverlap(a, b, pad) {
+  return (
+    a.x < b.x + b.width + pad &&
+    b.x < a.x + a.width + pad &&
+    a.y < b.y + b.height + pad &&
+    b.y < a.y + a.height + pad
+  );
+}
+
+function anyLabelsOverlap(svgs) {
+  return svgs.some((svg) => {
+    const labels = [...svg.querySelectorAll(".skills__star-label")];
+    for (let i = 0; i < labels.length; i += 1) {
+      for (let j = i + 1; j < labels.length; j += 1) {
+        if (labelsOverlap(labels[i].getBBox(), labels[j].getBBox(), LABEL_COLLISION_PAD)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  });
+}
+
+function fitAllConstellationLabels() {
+  const svgs = [...document.querySelectorAll(".skills__constellation-svg")];
+  const labels = svgs.flatMap((svg) => [...svg.querySelectorAll(".skills__star-label")]);
+
+  labels.forEach((label) => {
+    label.style.fontSize = "";
+  });
+  labels.forEach((label) => {
+    label.dataset.baseFontSize = getComputedStyle(label).fontSize;
+  });
+
+  const smallestBase = Math.min(...labels.map((label) => parseFloat(label.dataset.baseFontSize)));
+
+  let scale = 1;
+  const MAX_PASSES = 40;
+  for (let pass = 0; pass < MAX_PASSES; pass += 1) {
+    labels.forEach((label) => {
+      const base = parseFloat(label.dataset.baseFontSize);
+      label.style.fontSize = `${Math.max(base * scale, LABEL_MIN_FONT_PX)}px`;
+    });
+    labels.forEach(fitLabelToEdge);
+
+    const atFloor = smallestBase * scale <= LABEL_MIN_FONT_PX;
+    if (atFloor || !anyLabelsOverlap(svgs)) {
+      return;
+    }
+    scale *= LABEL_SHRINK_STEP;
+  }
+}
+
+function fitSkillsLayout() {
+  const wrap = document.querySelector(".skills__constellations");
+  const inner = document.querySelector(".skills__inner");
+  const title = document.querySelector(".skills__title-img");
+  const langs = document.querySelector('.skills__constellation[data-cat="languages"]');
+  const ai = document.querySelector('.skills__constellation[data-cat="ai"]');
+
+  if (!wrap || !inner || !title || !langs || !ai) {
+    return;
+  }
+
+  wrap.style.marginTop = "";
+  wrap.style.setProperty("--skills-scale", 1);
+
+  const titleRect = title.getBoundingClientRect();
+  const langsRect = langs.getBoundingClientRect();
+  const titleOverlap = titleRect.bottom - langsRect.top;
+  if (titleOverlap > 0) {
+    wrap.style.marginTop = `${titleOverlap + 8}px`;
+  }
+
+  const SCALE_STEP = 0.96;
+  const MIN_SCALE = 0.55;
+  let scale = 1;
+  for (let pass = 0; pass < 20; pass += 1) {
+    const innerRect = inner.getBoundingClientRect();
+    const aiRect = ai.getBoundingClientRect();
+    if (aiRect.bottom <= innerRect.bottom || scale <= MIN_SCALE) {
+      break;
+    }
+    scale = Math.max(scale * SCALE_STEP, MIN_SCALE);
+    wrap.style.setProperty("--skills-scale", scale);
+  }
 }
 
 function buildConstellations() {
@@ -335,8 +448,35 @@ function buildConstellations() {
       mount.appendChild(name);
     }
 
-    mount.appendChild(buildConstellationSvg(template, entry.skills));
+    const svg = buildConstellationSvg(template, entry.skills);
+    mount.appendChild(svg);
   });
+
+  const refitAll = () => {
+    fitAllConstellationLabels();
+    fitSkillsLayout();
+  };
+
+  refitAll();
+
+  if (document.fonts) {
+    document.fonts.ready.then(refitAll);
+  }
+
+  let resizeTimer;
+  const scheduleRefit = () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(refitAll, 120);
+  };
+  window.addEventListener("resize", scheduleRefit);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", scheduleRefit);
+  }
+
+  const skillsInner = document.querySelector(".skills__inner");
+  if (window.ResizeObserver && skillsInner) {
+    new ResizeObserver(scheduleRefit).observe(skillsInner);
+  }
 }
 
 function initAboutKeywords() {

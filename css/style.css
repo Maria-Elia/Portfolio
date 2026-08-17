@@ -1035,8 +1035,8 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
 
 .skills__constellation-label {
   display: block;
-  font-family: "Caveat", cursive;
-  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
   font-size: 3.2rem;
   color: var(--purple-text);
   text-shadow:
@@ -1125,8 +1125,8 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
 
   .skills__inner {
     position: absolute;
-    top: 24vw;
-    bottom: 24vw;
+    top: 15vw;
+    bottom: 26vw;
     left: 0;
     right: 0;
     padding: 0 1.6rem;
@@ -1152,47 +1152,70 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
     width: 100%;
     height: 100%;
     margin-top: 0;
+    transform: scale(var(--skills-scale, 1));
+    transform-origin: top center;
   }
 
   .skills__constellation,
-  .skills__constellation[data-cat] {   position: static;
-    width: 25cqh;
+  .skills__constellation[data-cat] {
+    position: static;
+    width: min(62cqw, 36rem);
   }
-  .skills__constellation:nth-child(odd) {    margin: 0 auto 0 3%;
+  .skills__constellation:nth-child(odd) {
+    margin: 0 auto 0 1%;
   }
 
   .skills__constellation:nth-child(even) {
-    margin: 0 3% 0 auto;
+    margin: 0 1% 0 auto;
   }
 
   .skills__constellation-label {
-    font-size: 3.6cqh;
+    font-size: clamp(2rem, 4.8cqw, 2.8rem);
     margin-bottom: 0;
   }
 
   .skills__constellation-name {
-    font-size: 2.5cqh;
+    font-size: clamp(1.2rem, 2.7cqw, 1.5rem);
     letter-spacing: 0.08em;
     margin-bottom: 0.35cqh;
   }
 
   .skills__constellation[data-cat="ai"] .skills__star-label {
-    /* clamped in real px (not rem - root font-size is fluid/reduced,
-       not a stable 16px) because the raw cqh value compounds with the
-       cluster box also growing in cqh: at wide mobile/tablet widths
-       both factors grow together and font-size balloons well past
-       legible, causing labels to collide. The px ceiling caps that
-       runaway while cqh still drives the 375px floor as designed. */
-    font-size: clamp(14px, 4.3cqh, 27px); /* viewBox 260 wide - narrowest, capped lower than the others since it hits edge overflow first */
+    font-size: clamp(16px, 11.6cqw, 36px); /* viewBox 280 wide */
   }
 
   .skills__constellation[data-cat="frameworks"] .skills__star-label {
-    font-size: clamp(14px, 4.9cqh, 36px); /* viewBox 300 wide */
+    font-size: clamp(16px, 12.4cqw, 38px); /* viewBox 300 wide */
   }
 
   .skills__constellation[data-cat="languages"] .skills__star-label,
   .skills__constellation[data-cat="tools"] .skills__star-label {
-    font-size: clamp(14px, 6cqh, 36px); /* viewBox 360 wide */
+    font-size: clamp(16px, 14.9cqw, 44px); /* viewBox 360 wide, reference size */
+  }
+}
+
+@media (max-width: 480px) {
+  .skills__title-img {
+    top: 6rem;
+    right: 2rem;
+    width: clamp(20rem, 65vw, 36.7rem);
+  }
+
+  .skills__constellations {
+    gap: 0.4cqh;
+  }
+
+  .skills__constellation,
+  .skills__constellation[data-cat] {
+    width: min(62cqw, 36rem);
+  }
+
+  .skills__constellation:nth-child(1) {
+    margin-top: 2cqh;
+  }
+
+  .skills__constellation:nth-child(2) {
+    margin-top: 1cqh;
   }
 }
 
