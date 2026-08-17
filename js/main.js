@@ -192,7 +192,7 @@ const CONSTELLATION_TEMPLATES = {
     points: [
       { x: 40, y: 95 },
       { x: 160, y: 15 },
-      { x: 110, y: 140 },
+      { x: 110, y: 140, narrowLabelMaxWidth: 140 },
     ],
     edges: [
       [0, 1],
@@ -223,9 +223,9 @@ const CONSTELLATION_TEMPLATES = {
       { x: 55, y: 130 },
       { x: 25, y: 75 },
       { x: 145, y: 10 },
-      { x: 270, y: 10 },
-      { x: 325, y: 75 },
-      { x: 240, y: 150 },
+      { x: 270, y: 10, labelSide: "right" }, // Java
+      { x: 325, y: 75, labelSide: "right", labelMaxWidth: 95 }, // HTML
+      { x: 240, y: 150, labelSide: "right" }, // CSS
     ],
     edges: [
       [0, 1],
@@ -244,7 +244,7 @@ const CONSTELLATION_TEMPLATES = {
       { x: 245, y: 60 },
       { x: 30, y: 110 },
       { x: 230, y: 140 },
-      { x: 350, y: 120 },
+      { x: 350, y: 120, labelSide: "right", labelMaxWidth: 160 }, // VS Code
       { x: 195, y: 235 },
     ],
     edges: [
@@ -295,7 +295,7 @@ function buildConstellationSvg(template, skills) {
 
     const roomRight = viewBoxWidth - (point.x + 10) - LABEL_EDGE_MARGIN;
     const roomLeft = point.x - 10 - LABEL_EDGE_MARGIN;
-    const anchorLeft = roomRight < roomLeft;
+    const anchorLeft = point.labelSide ? point.labelSide === "left" : roomRight < roomLeft;
 
     const label = document.createElementNS(svgNS, "text");
     label.classList.add("skills__star-label");
@@ -305,7 +305,8 @@ function buildConstellationSvg(template, skills) {
       label.setAttribute("text-anchor", "end");
     }
     label.textContent = skills[i];
-    label.dataset.maxWidth = Math.max(anchorLeft ? roomLeft : roomRight, LABEL_EDGE_MARGIN);
+    label.dataset.maxWidth =
+      point.labelMaxWidth ?? Math.max(anchorLeft ? roomLeft : roomRight, LABEL_EDGE_MARGIN);
     svg.appendChild(label);
   });
 
@@ -408,12 +409,99 @@ function fitSkillsLayout() {
   for (let pass = 0; pass < 20; pass += 1) {
     const innerRect = inner.getBoundingClientRect();
     const aiRect = ai.getBoundingClientRect();
-    if (aiRect.bottom <= innerRect.bottom || scale <= MIN_SCALE) {
+    if (aiRect.bottom <= innerRect.bottom - 4 || scale <= MIN_SCALE) {
       break;
     }
     scale = Math.max(scale * SCALE_STEP, MIN_SCALE);
     wrap.style.setProperty("--skills-scale", scale);
   }
+}
+
+const NARROW_QUERY = "(max-width: 800px)";
+const NARROW_VIEWBOXES = {
+  ai: "0 0 220 150",
+  frameworks: "45 0 200 130",
+};
+
+function updateTightViewBoxes() {
+  const isNarrow = window.matchMedia(NARROW_QUERY).matches;
+
+  Object.entries(NARROW_VIEWBOXES).forEach(([cat, narrowViewBox]) => {
+    const mount = document.querySelector(`.skills__constellation[data-cat="${cat}"]`);
+    const svg = mount ? mount.querySelector(".skills__constellation-svg") : null;
+    const template = CONSTELLATION_TEMPLATES[cat];
+
+    if (!mount || !svg || !template) {
+      return;
+    }
+
+    const activeViewBox = isNarrow ? narrowViewBox : template.viewBox;
+    const [minX, , viewBoxWidth] = activeViewBox.split(" ").map(Number);
+
+    svg.setAttribute("viewBox", activeViewBox);
+    mount.classList.toggle("skills__constellation--tight", isNarrow);
+
+    const labels = svg.querySelectorAll(".skills__star-label");
+    template.points.forEach((point, i) => {
+      const label = labels[i];
+
+      if (!label) {
+        return;
+      }
+
+      const roomRight = minX + viewBoxWidth - (point.x + 10) - LABEL_EDGE_MARGIN;
+      const roomLeft = point.x - minX - 10 - LABEL_EDGE_MARGIN;
+      const anchorLeft = point.labelSide ? point.labelSide === "left" : roomRight < roomLeft;
+
+      label.setAttribute("x", anchorLeft ? point.x - 10 : point.x + 10);
+      if (anchorLeft) {
+        label.setAttribute("text-anchor", "end");
+      } else {
+        label.removeAttribute("text-anchor");
+      }
+      const narrowOverride = isNarrow ? point.narrowLabelMaxWidth : undefined;
+      label.dataset.maxWidth =
+        narrowOverride ??
+        point.labelMaxWidth ??
+        Math.max(anchorLeft ? roomLeft : roomRight, LABEL_EDGE_MARGIN);
+    });
+  });
+}
+
+const SKILL_FONT_RANGE_QUERY = "(max-width: 460px) and (min-width: 320px)";
+const SKILL_FONT_SMALL_QUERY = "(max-width: 369px)";
+const SKILL_FONT_TARGET_PX = 15;
+const SKILL_FONT_TARGET_PX_SMALL = 12.5;
+
+function applyFlatSkillFontSize() {
+  const inRange = window.matchMedia(SKILL_FONT_RANGE_QUERY).matches;
+  const targetPx = window.matchMedia(SKILL_FONT_SMALL_QUERY).matches
+    ? SKILL_FONT_TARGET_PX_SMALL
+    : SKILL_FONT_TARGET_PX;
+
+  document.querySelectorAll(".skills__constellation-svg").forEach((svg) => {
+    const labels = svg.querySelectorAll(".skills__star-label");
+
+    if (!inRange) {
+      labels.forEach((label) => {
+        label.style.fontSize = "";
+      });
+      return;
+    }
+
+    const viewBoxWidth = svg.viewBox.baseVal.width;
+    const svgWidthPx = svg.getBoundingClientRect().width;
+
+    if (!viewBoxWidth || !svgWidthPx) {
+      return;
+    }
+
+    const userUnits = targetPx * (viewBoxWidth / svgWidthPx);
+    labels.forEach((label) => {
+      label.style.fontSize = `${userUnits}px`;
+      fitLabelToEdge(label);
+    });
+  });
 }
 
 function buildConstellations() {
@@ -453,7 +541,9 @@ function buildConstellations() {
   });
 
   const refitAll = () => {
+    updateTightViewBoxes();
     fitAllConstellationLabels();
+    applyFlatSkillFontSize();
     fitSkillsLayout();
   };
 
@@ -462,6 +552,9 @@ function buildConstellations() {
   if (document.fonts) {
     document.fonts.ready.then(refitAll);
   }
+
+  setTimeout(refitAll, 300);
+  setTimeout(refitAll, 1000);
 
   let resizeTimer;
   const scheduleRefit = () => {
