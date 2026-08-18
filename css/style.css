@@ -1428,9 +1428,15 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   overflow: hidden;
 }
 
+.contact__title-wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
 .contact__arc {
   position: absolute;
-  top: 0.8rem;
+  top: -16.8rem;
   left: 50%;
   transform: translateX(calc(-50% + 3rem)) rotate(17deg);
   width: 62rem;
@@ -1776,6 +1782,34 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   }
 }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+  .contact__arc {
+    left: calc(50% + 1.5rem);
+    top: -8.6rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .contact__arc {
+    left: calc(50% + 1.5rem);
+    top: -8.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact__arc {
+    left: calc(50% + 2.5rem);
+    top: -5.2rem;
+    transform: translateX(calc(-50% + 3rem)) rotate(17deg);
+  }
+}
+
+@media (max-width: 420px) {
+  .contact__arc {
+    left: calc(50% + 6rem);
+  }
+}
+
 @media (max-width: 768px) {
   html {
     font-size: 7px;
@@ -1870,6 +1904,12 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
 
   .contact__arc text {
     font-size: 18px;
+  }
+}
+
+@media (max-width: 380px) {
+  .contact__arc text {
+    font-size: 21.6px;
   }
 }
 
