@@ -23,7 +23,14 @@ function initNav() {
 function initAnchorScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (event) => {
-      const target = document.querySelector(link.getAttribute("href"));
+      const href = link.getAttribute("href");
+      // dock these titles at the top instead of the section's own top (which includes decorative padding)
+      const dock = {
+        "#about": { selector: ".about__title-img", offsetY: 0 },
+        "#skills": { selector: ".skills__title-img", offsetY: -100 },
+        "#projects": { selector: ".project-spotlight__badge", offsetY: 0 },
+      }[href];
+      const target = dock ? document.querySelector(dock.selector) : document.querySelector(href);
 
       if (!target) {
         return;
@@ -33,7 +40,7 @@ function initAnchorScroll() {
       gsap.to(window, {
         duration: prefersReducedMotion ? 0 : 0.9,
         ease: "power2.inOut",
-        scrollTo: { y: target, autoKill: true }, // autoKill lets a manual scroll take over
+        scrollTo: { y: target, offsetY: dock ? dock.offsetY : 0, autoKill: true }, // autoKill lets a manual scroll take over
       });
     });
   });
