@@ -109,6 +109,10 @@ function initContactTitle() {
   initDrawnTitle(document.querySelector(".contact__title-img"), ".contact__title-svg--lets");
 }
 
+function initProjectsTitle() {
+  initDrawnTitle(document.querySelector(".project-spotlight__badge"), ".project-spotlight__badge-svg");
+}
+
 function initSkillsTitle() {
   const title = document.querySelector(".skills__title-img");
 
@@ -720,7 +724,6 @@ function initSectionReveals() {
     });
   };
 
-  reveal(".projects__heading-block > *", ".projects__heading-block");
   reveal([".contact__arc", ".contact__flip-wrap"], ".contact");
 }
 
@@ -892,10 +895,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadTitleSvg("contact", "assets/svg/contact-title.svg"),
     loadTitleSvg("cat-paw", "assets/svg/cat-paw.svg"),
     loadTitleSvg("skills", "assets/svg/skills-title-cropped.svg"),
+    loadTitleSvg("projects", "assets/svg/projects-title.svg"),
   ]);
   initAboutTitle();
   initSkillsTitle();
   initContactTitle();
+  initProjectsTitle();
   initAboutKeywords();
   initAboutSparkles();
   initCloudParallax();

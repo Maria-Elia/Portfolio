@@ -533,7 +533,9 @@ ul {
   .about__title-img::before,
   .about__title-img::after,
   .skills__title-img::before,
-  .skills__title-img::after {
+  .skills__title-img::after,
+  .project-spotlight__badge::before,
+  .project-spotlight__badge::after {
     animation: none;
     opacity: 0.6;
   }
@@ -1332,42 +1334,6 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   background: var(--white);
 }
 
-.projects__heading-block {
-  text-align: center;
-  padding: 0 4rem 4rem;
-}
-
-.projects__heading {
-  font-family: "Caveat", cursive;
-  font-size: 9rem;
-  color: var(--purple-mid);
-}
-
-.projects__tagline {
-  font-weight: 700;
-  letter-spacing: 0.2rem;
-  color: var(--purple-text);
-  margin-top: -1rem;
-}
-
-.projects__pill {
-  display: inline-block;
-  margin-top: 2rem;
-  padding: 1rem 3rem;
-  background: var(--yellow-soft);
-  color: var(--pink-primary);
-  font-family: "Righteous", sans-serif;
-  font-size: 3.6rem;
-  border-radius: 1rem;
-}
-
-.projects__intro {
-  max-width: 60rem;
-  margin: 2rem auto 0;
-  font-size: 1.8rem;
-  color: var(--purple-text);
-}
-
 .projects__cta {
   display: flex;
   width: fit-content;
@@ -1375,6 +1341,7 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
 }
 
 .project-spotlight {
+  position: relative;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
@@ -1382,6 +1349,71 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   max-width: 110rem;
   margin: 0 auto;
   padding: 0 4rem;
+}
+
+.project-spotlight__badge {
+  position: absolute;
+  top: -25.74rem;
+  left: -0.2rem;
+  width: 57.6rem;
+  transform: rotate(-8deg);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.project-spotlight__badge-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.project-spotlight__badge .svg-title-shadow-group {
+  transform: translate(0.5rem, 0.8rem);
+}
+
+.project-spotlight__badge .svg-title--works {
+  stroke: color-mix(in srgb, var(--pink-soft) 65%, white);
+}
+
+.project-spotlight__badge::before,
+.project-spotlight__badge::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  background: var(--yellow-soft);
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  transform: rotate(15deg) skew(10deg);
+  animation: twinkle 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.project-spotlight__badge::before {
+  width: 7.2rem;
+  height: 8.7rem;
+  top: -4.8rem;
+  left: 3rem;
+}
+
+.project-spotlight__badge::after {
+  width: 3.6rem;
+  height: 5.1rem;
+  top: 1.2rem;
+  left: 0.9rem;
+  animation-delay: 0.3s;
+}
+
+.decor-idle .project-spotlight__badge::before,
+.decor-idle .project-spotlight__badge::after {
+  animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+  .project-spotlight__badge {
+    width: 25.6rem;
+    top: -12.87rem;
+    left: 0.56rem;
+  }
 }
 
 .project-spotlight__media {
