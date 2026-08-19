@@ -1374,70 +1374,116 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   margin: 4rem auto 0;
 }
 
-.marquee-row {
+.project-spotlight {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 4rem;
+  max-width: 110rem;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+.project-spotlight__media {
+  display: block;
   overflow: hidden;
-  margin: 1.5rem 0;
+  border-radius: 2.4rem;
+  box-shadow: 0 1.2rem 3.2rem rgba(85, 64, 165, 0.24);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.marquee-row__list {
-  display: flex;
-  gap: 1.5rem;
-  width: max-content;
+.project-spotlight__media:hover {
+  transform: translateY(-0.6rem);
+  box-shadow: 0 1.8rem 4rem rgba(85, 64, 165, 0.32);
 }
 
-.marquee-card {
-  width: 50rem;
-  height: 30rem;
-  border-radius: 1rem;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Righteous", sans-serif;
-  font-size: 2.4rem;
-  color: var(--white);
-  text-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-/* hovering a row holds it still, so the card under the cursor answers back */
-.marquee-row:hover .marquee-card:hover {
-  transform: translateY(-0.8rem);
-  box-shadow: 0 1.2rem 2.4rem rgba(85, 64, 165, 0.28);
-}
-
-.marquee-card__link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.project-spotlight__media img {
   width: 100%;
-  height: 100%;
-  padding: 0 2rem;
-  color: inherit;
-  text-decoration: none;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.project-spotlight__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.15rem;
+  color: var(--teal-text);
+}
+
+.project-spotlight__status-dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--teal-blue);
+}
+
+.project-spotlight__title {
+  margin-top: 1rem;
+  font-family: "Righteous", sans-serif;
+  font-size: 3rem;
+  color: var(--purple-mid);
+}
+
+.project-spotlight__desc {
+  margin-top: 1.2rem;
+  font-size: 1.7rem;
+  line-height: 1.6;
+  color: var(--purple-text);
+  max-width: 45ch;
+}
+
+.project-spotlight__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+  list-style: none;
+}
+
+.project-spotlight__tags li {
+  padding: 0.5rem 1.4rem;
+  border-radius: 10rem;
+  background: var(--pink-lightest);
+  color: var(--purple-text);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.project-spotlight__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  margin-top: 2.4rem;
+}
+
+.btn-pill--small {
+  margin-top: 0;
+  padding: 1.2rem 3.2rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.15rem;
+}
+
+.btn-pill--ghost {
+  background: transparent;
+  border-color: var(--purple-deep);
+}
+
+.projects__more-note {
+  margin-top: 3rem;
   text-align: center;
+  color: var(--purple-text);
+  opacity: 0.7;
+  font-size: 1.5rem;
 }
 
-.marquee-card--image {
-  background-size: cover;
-  background-position: top center;
-}
-
-.marquee-card--image .marquee-card__link {
-  align-items: flex-end;
-  padding-bottom: 2rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 55%);
-}
-
-.marquee-card__title {
-  font-size: 1.8rem;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-card {
-    transition: none;
+@media (max-width: 768px) {
+  .project-spotlight {
+    grid-template-columns: 1fr;
+    padding: 0 2.4rem;
   }
 }
 

@@ -590,49 +590,6 @@ function initAboutKeywords() {
   });
 }
 
-function initMarquee() {
-  //  hovering holds the row still
-  document.querySelectorAll(".marquee-row").forEach((row) => {
-    const list = row.querySelector(".marquee-row__list");
-    const setPaused = (paused) => {
-      gsap.getTweensOf(list).forEach((tween) => (paused ? tween.pause() : tween.resume()));
-    };
-
-    row.addEventListener("mouseenter", () => setPaused(true));
-    row.addEventListener("mouseleave", () => setPaused(false));
-  });
-
-  gsap.matchMedia().add(
-    {
-      motionOK: "(prefers-reduced-motion: no-preference)",
-      isTablet: "(max-width: 1024px)",
-      isPhone: "(max-width: 768px)",
-      isSmallPhone: "(max-width: 480px)",
-    },
-    (context) => {
-      if (!context.conditions.motionOK) {
-        return; // rows stay static
-      }
-
-      document.querySelectorAll(".marquee-row").forEach((row) => {
-        const list = row.querySelector(".marquee-row__list");
-        const direction = row.dataset.direction === "right" ? 1 : -1;
-        const distance = list.scrollWidth / 2; // list content is duplicated, so half its width is one full loop
-
-        gsap.fromTo(
-          list,
-          { x: direction === -1 ? 0 : -distance },
-          {
-            x: direction === -1 ? -distance : 0,
-            duration: 25,
-            ease: "none",
-            repeat: -1,
-          },
-        );
-      });
-    },
-  );
-}
 function initCloudParallax() {
   if (prefersReducedMotion || CSS.supports("animation-timeline", "view()")) {
     return;
@@ -944,7 +901,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   initCloudParallax();
   initSkillsParallax();
   initSkillsConstellations();
-  initMarquee();
   initSectionReveals(); // after the title triggers, so they refresh in page order
   initTwinkles();
 });
