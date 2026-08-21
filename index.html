@@ -11,8 +11,8 @@
     href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@500;600&family=Pacifico&family=Poppins:wght@400;700&family=Righteous&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <script data-goatcounter="https://portfolio-mariaelia.goatcounter.com/count"
-    async src="//gc.zgo.at/count.js"></script>
+  <script data-goatcounter="https://portfolio-mariaelia.goatcounter.com/count" async
+    src="//gc.zgo.at/count.js"></script>
 </head>
 
 <body>
@@ -217,30 +217,59 @@
     </section>
 
     <section id="projects" class="projects">
-      <div class="project-spotlight">
+      <div class="project-spotlight" data-project-carousel>
         <div class="project-spotlight__badge" role="img" aria-label="Projects" data-title-svg-mount="projects"></div>
-        <a class="project-spotlight__media" href="https://catfood.mariaelia.de" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/projects/catfood.png" alt="Katzenfutter-Rechner screenshot" loading="lazy" />
-        </a>
-        <div class="project-spotlight__body">
-          <span class="project-spotlight__status">
-            <span class="project-spotlight__status-dot"></span>
-            Live
+        <div class="project-spotlight__media-stack">
+          <a class="project-spotlight__media" href="https://catfood.mariaelia.de" target="_blank"
+            rel="noopener noreferrer" data-project-media>
+            <img src="assets/img/projects/catfood.png" alt="Katzenfutter-Rechner screenshot" loading="lazy"
+              data-project-img />
+          </a>
+          <a class="project-spotlight__media project-spotlight__media--icon"
+            href="https://github.com/Maria-Elia/payback-coupon-adder" target="_blank" rel="noopener noreferrer"
+            data-project-media>
+            <img src="assets/img/projects/payback-icon.png" alt="PAYBACK Coupon Activator icon" loading="lazy"
+              data-project-img />
+          </a>
+        </div>
+        <div class="project-spotlight__body" data-project-body>
+          <span class="project-spotlight__status" data-project-line>
+            <span class="project-spotlight__status-dot" data-project-status-dot></span>
+            <span data-project-status>Live</span>
           </span>
-          <h3 class="project-spotlight__title">Katzenfutter-Rechner</h3>
-          <p class="project-spotlight__desc">
-            Calculates a cat's daily food and water needs from weight, activity level, and food type.
+          <h3 class="project-spotlight__title" data-project-line data-project-title>Katzenfutter-Rechner</h3>
+          <p class="project-spotlight__desc" data-project-line data-project-desc>
+            Calculates a cat's daily food and water needs from weight and food type.
           </p>
-          <ul class="project-spotlight__tags">
+          <ul class="project-spotlight__tags" data-project-line data-project-tags>
             <li>HTML</li>
             <li>CSS</li>
             <li>JavaScript</li>
           </ul>
-          <div class="project-spotlight__actions">
-            <a class="btn-pill btn-pill--small" href="https://catfood.mariaelia.de" target="_blank" rel="noopener noreferrer">Live Demo</a>
-            <a class="btn-pill btn-pill--small btn-pill--ghost" href="https://github.com/Maria-Elia/catfood-calculator" target="_blank" rel="noopener noreferrer">Code</a>
+          <div class="project-spotlight__actions" data-project-line data-project-actions>
+            <a class="btn-pill btn-pill--small" href="https://catfood.mariaelia.de" target="_blank"
+              rel="noopener noreferrer">Live Demo</a>
+            <a class="btn-pill btn-pill--small btn-pill--ghost" href="https://github.com/Maria-Elia/catfood-calculator"
+              target="_blank" rel="noopener noreferrer">Code</a>
           </div>
         </div>
+      </div>
+
+      <div class="project-spotlight__nav">
+        <button type="button" class="project-spotlight__arrow project-spotlight__arrow--prev"
+          aria-label="Previous project" data-project-prev>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+        <button type="button" class="project-spotlight__arrow project-spotlight__arrow--next" aria-label="Next project"
+          data-project-next>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
       </div>
 
       <p class="projects__more-note">More projects coming soon.</p>

@@ -1343,7 +1343,7 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
 .project-spotlight {
   position: relative;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   align-items: center;
   gap: 4rem;
   max-width: 110rem;
@@ -1424,26 +1424,40 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   }
 }
 
+.project-spotlight__media-stack {
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+
 .project-spotlight__media {
+  position: absolute;
+  inset: 0;
   display: block;
   overflow: hidden;
   border-radius: 2.4rem;
   box-shadow: 0 1.2rem 3.2rem rgba(85, 64, 165, 0.24);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.project-spotlight__media:hover {
-  transform: translateY(-0.6rem);
-  box-shadow: 0 1.8rem 4rem rgba(85, 64, 165, 0.32);
 }
 
 .project-spotlight__media img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
   object-position: top center;
+}
+
+.project-spotlight__media--icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--white), var(--pink-lightest) 140%);
+}
+
+.project-spotlight__media--icon img {
+  width: 50%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  filter: drop-shadow(0 0.8rem 1.6rem rgba(85, 64, 165, 0.25));
 }
 
 .project-spotlight__status {
@@ -1512,6 +1526,50 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
 .btn-pill--ghost {
   background: transparent;
   border-color: var(--purple-deep);
+}
+
+.project-spotlight__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+  margin-top: 3.2rem;
+}
+
+.project-spotlight__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.2rem;
+  height: 5.2rem;
+  border: 0.24rem solid var(--pink-lightest);
+  border-radius: 50%;
+  background: linear-gradient(360deg, rgba(252, 151, 209, 0.6) 0%, rgba(165, 188, 255, 0.6) 100%);
+  color: var(--purple-text);
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.project-spotlight__arrow svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.project-spotlight__arrow:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 0.8rem 1.6rem rgba(85, 64, 165, 0.24);
+}
+
+.project-spotlight__arrow:active {
+  transform: translateY(0);
+}
+
+.project-spotlight__arrow:disabled {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
 }
 
 .projects__more-note {

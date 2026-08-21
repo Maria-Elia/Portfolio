@@ -117,7 +117,209 @@ function initContactTitle() {
 }
 
 function initProjectsTitle() {
-  initDrawnTitle(document.querySelector(".project-spotlight__badge"), ".project-spotlight__badge-svg");
+  initDrawnTitle(
+    document.querySelector(".project-spotlight__badge"),
+    ".project-spotlight__badge-svg",
+  );
+}
+
+const PROJECTS_DATA = [
+  {
+    title: "Katzenfutter-Rechner",
+    desc: "Calculates a cat's daily food and water needs from weight and food type.",
+    tags: ["HTML", "CSS", "JavaScript"],
+    status: "Live",
+    statusColor: "var(--teal-blue)",
+    media: {
+      src: "assets/img/projects/catfood.png",
+      alt: "Katzenfutter-Rechner screenshot",
+      icon: false,
+    },
+    href: "https://catfood.mariaelia.de",
+    actions: [
+      { label: "Live Demo", href: "https://catfood.mariaelia.de", ghost: false },
+      { label: "Code", href: "https://github.com/Maria-Elia/catfood-calculator", ghost: true },
+    ],
+  },
+  {
+    title: "PAYBACK Coupon Activator",
+    desc: "Browser extension that activates every open PAYBACK eCoupon with one click.",
+    tags: ["JavaScript", "Chrome Extension"],
+    status: "Extension",
+    statusColor: "var(--purple-deep)",
+    media: {
+      src: "assets/img/projects/payback-icon.png",
+      alt: "PAYBACK Coupon Activator icon",
+      icon: true,
+    },
+    href: "https://github.com/Maria-Elia/payback-coupon-adder",
+    actions: [
+      { label: "Code", href: "https://github.com/Maria-Elia/payback-coupon-adder", ghost: true },
+    ],
+  },
+];
+
+function initProjectsCarousel() {
+  const root = document.querySelector("[data-project-carousel]");
+  const slotEls = root ? [...root.querySelectorAll("[data-project-media]")] : [];
+
+  if (!root || PROJECTS_DATA.length < 2 || slotEls.length < 2) {
+    return;
+  }
+
+  const slots = slotEls.map((el, i) => ({
+    el,
+    img: el.querySelector("[data-project-img]"),
+    projectIndex: i,
+  }));
+
+  const bodyEl = root.querySelector("[data-project-body]");
+  const lines = root.querySelectorAll("[data-project-line]");
+  const statusDot = root.querySelector("[data-project-status-dot]");
+  const statusText = root.querySelector("[data-project-status]");
+  const titleEl = root.querySelector("[data-project-title]");
+  const descEl = root.querySelector("[data-project-desc]");
+  const tagsEl = root.querySelector("[data-project-tags]");
+  const actionsEl = root.querySelector("[data-project-actions]");
+  const prevBtn = document.querySelector("[data-project-prev]");
+  const nextBtn = document.querySelector("[data-project-next]");
+
+  gsap.set(slotEls, { xPercent: 0, yPercent: 0, rotate: 0 });
+  slots[0].el.style.zIndex = 2;
+  slots[1].el.style.zIndex = 1;
+  let topSlot = slots[0];
+  let bottomSlot = slots[1];
+  let activeIndex = 0;
+  let animating = false;
+
+  const setSlotContent = (slot, projectIndex) => {
+    const project = PROJECTS_DATA[projectIndex];
+    slot.projectIndex = projectIndex;
+    slot.el.href = project.href;
+    slot.img.src = project.media.src;
+    slot.img.alt = project.media.alt;
+    slot.el.classList.toggle("project-spotlight__media--icon", project.media.icon);
+  };
+
+  const applyText = (project) => {
+    statusDot.style.background = project.statusColor;
+    statusText.textContent = project.status;
+    titleEl.textContent = project.title;
+    descEl.textContent = project.desc;
+    tagsEl.innerHTML = project.tags.map((tag) => `<li>${tag}</li>`).join("");
+    actionsEl.innerHTML = project.actions
+      .map(
+        (action) =>
+          `<a class="btn-pill btn-pill--small${action.ghost ? " btn-pill--ghost" : ""}" href="${action.href}" target="_blank" rel="noopener noreferrer">${action.label}</a>`,
+      )
+      .join("");
+  };
+
+  const setButtonsDisabled = (disabled) => {
+    prevBtn.disabled = disabled;
+    nextBtn.disabled = disabled;
+  };
+
+  const go = (direction) => {
+    if (animating) {
+      return;
+    }
+
+    const targetIndex = (activeIndex + direction + PROJECTS_DATA.length) % PROJECTS_DATA.length;
+    const project = PROJECTS_DATA[targetIndex];
+
+    // the hidden card only needs fixing up if a future project count makes
+    // prev/next disagree about what's behind the top card right now
+    if (bottomSlot.projectIndex !== targetIndex) {
+      setSlotContent(bottomSlot, targetIndex);
+    }
+
+    if (prefersReducedMotion) {
+      applyText(project);
+      gsap.set(topSlot.el, { zIndex: 1 });
+      gsap.set(bottomSlot.el, { zIndex: 2 });
+      [topSlot, bottomSlot] = [bottomSlot, topSlot];
+      activeIndex = targetIndex;
+      return;
+    }
+
+    animating = true;
+    setButtonsDisabled(true);
+
+    const leaving = topSlot;
+    const arriving = bottomSlot;
+
+    gsap
+      .timeline({
+        onComplete: () => {
+          topSlot = arriving;
+          bottomSlot = leaving;
+          activeIndex = targetIndex;
+          animating = false;
+          setButtonsDisabled(false);
+        },
+      })
+      // toss the top card up and away
+      .to(
+        leaving.el,
+        {
+          xPercent: direction * 10,
+          yPercent: -110,
+          rotate: direction * 7,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        0,
+      )
+      // old text lingers a beat into the toss, then leaves the same way it arrives
+      .to(lines, { autoAlpha: 0, y: 24, duration: 0.3, stagger: 0.05, ease: "power2.in" }, 0.1)
+      .call(() => applyText(project), null, 0.6)
+      // at the peak, the arriving card becomes the new front of the stack
+      .call(
+        () => {
+          gsap.set(leaving.el, { zIndex: 1 });
+          gsap.set(arriving.el, { zIndex: 2 });
+        },
+        null,
+        0.5,
+      )
+      // ...so the leaving card visibly slides back down behind it, into the stack
+      .to(
+        leaving.el,
+        { xPercent: 0, yPercent: 0, rotate: 0, duration: 0.5, ease: "power2.in" },
+        0.5,
+      )
+      .to(lines, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power2.out" }, 0.7);
+  };
+
+  prevBtn.addEventListener("click", () => go(-1));
+  nextBtn.addEventListener("click", () => go(1));
+
+  // pin the body to the tallest project's height so switching cards doesn't
+  // shift page layout (mainly matters on narrow viewports, where text wraps
+  // to different line counts per project)
+  const lockBodyHeight = () => {
+    bodyEl.style.minHeight = "";
+    const tallest = Math.max(
+      ...PROJECTS_DATA.map((project) => {
+        applyText(project);
+        return bodyEl.getBoundingClientRect().height;
+      }),
+    );
+    bodyEl.style.minHeight = `${tallest}px`;
+    applyText(PROJECTS_DATA[activeIndex]);
+  };
+
+  lockBodyHeight();
+  if (document.fonts) {
+    document.fonts.ready.then(lockBodyHeight);
+  }
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(lockBodyHeight, 150);
+  });
 }
 
 function initSkillsTitle() {
@@ -908,6 +1110,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   initSkillsTitle();
   initContactTitle();
   initProjectsTitle();
+  initProjectsCarousel();
   initAboutKeywords();
   initAboutSparkles();
   initCloudParallax();
