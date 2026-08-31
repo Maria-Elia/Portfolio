@@ -157,6 +157,23 @@ const PROJECTS_DATA = [
       { label: "Code", href: "https://github.com/Maria-Elia/payback-coupon-adder", ghost: true },
     ],
   },
+  {
+    title: "QR Code Generator & Designer",
+    desc: "Customizable QR codes with different styles, gradients, and logo embedding.",
+    tags: ["React", "Vite", "JavaScript"],
+    status: "Live",
+    statusColor: "var(--teal-blue)",
+    media: {
+      src: "assets/img/projects/qrcode.png",
+      alt: "QR Code Generator & Designer screenshot",
+      icon: false,
+    },
+    href: "https://qrcode.mariaelia.de",
+    actions: [
+      { label: "Live Demo", href: "https://qrcode.mariaelia.de", ghost: false },
+      { label: "Code", href: "https://github.com/Maria-Elia/qr-code-creator", ghost: true },
+    ],
+  },
 ];
 
 function initProjectsCarousel() {
