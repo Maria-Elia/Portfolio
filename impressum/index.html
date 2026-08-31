@@ -16,7 +16,7 @@
 <body>
 
   <main class="legal-page">
-    <a href="../index.html" class="legal-page__back">&larr; Zurück zur Startseite</a>
+    <a href="../index.html" class="legal-page__back" id="legal-back-link">&larr; Zurück zur Startseite</a>
     <h1 class="legal-page__title">Impressum</h1>
 
     <section class="legal-page__section">
@@ -65,6 +65,30 @@
       <p class="site-footer__copyright">&copy; 2026 Maria Elia. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var backLink = document.getElementById('legal-back-link');
+      if (!backLink) return;
+      backLink.addEventListener('click', function (event) {
+        var referrer = document.referrer;
+        var isRelated = false;
+        if (referrer) {
+          try {
+            var referrerHost = new URL(referrer).hostname;
+            isRelated = referrerHost === 'mariaelia.de' || referrerHost.endsWith('.mariaelia.de');
+          } catch (error) {
+            isRelated = false;
+          }
+        }
+        if (isRelated) {
+          event.preventDefault();
+          history.back();
+        }
+        // Otherwise: let the link's own href (mariaelia.de homepage) navigate normally.
+      });
+    })();
+  </script>
 
 </body>
 
