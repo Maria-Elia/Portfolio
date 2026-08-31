@@ -25,10 +25,11 @@ function initAnchorScroll() {
     link.addEventListener("click", (event) => {
       const href = link.getAttribute("href");
       // dock these titles at the top instead of the section's own top (which includes decorative padding)
+      const isMobileLayout = window.innerWidth <= 768;
       const dock = {
-        "#about": { selector: ".about__title-img", offsetY: 0 },
-        "#skills": { selector: ".skills__title-img", offsetY: -100 },
-        "#projects": { selector: ".project-spotlight__badge", offsetY: 0 },
+        "#about": { selector: ".about__title-img", offsetY: isMobileLayout ? 300 : 0 },
+        "#skills": { selector: ".skills__title-img", offsetY: isMobileLayout ? 80 : -100 },
+        "#projects": { selector: ".projects", offsetY: isMobileLayout ? 200 : 150 },
       }[href];
       const target = dock ? document.querySelector(dock.selector) : document.querySelector(href);
 
