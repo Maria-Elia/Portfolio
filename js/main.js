@@ -312,6 +312,75 @@ function initProjectsCarousel() {
   prevBtn.addEventListener("click", () => go(-1));
   nextBtn.addEventListener("click", () => go(1));
 
+  // swipe/drag support on the card stack itself
+  const mediaStack = root.querySelector(".project-spotlight__media-stack");
+  const SWIPE_THRESHOLD = 50;
+  let dragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let dragDeltaX = 0;
+  let dragIsHorizontal = false;
+  let suppressNextClick = false;
+
+  mediaStack.addEventListener("pointerdown", (event) => {
+    if (animating || (event.pointerType === "mouse" && event.button !== 0)) {
+      return;
+    }
+    dragging = true;
+    dragIsHorizontal = false;
+    dragDeltaX = 0;
+    dragStartX = event.clientX;
+    dragStartY = event.clientY;
+  });
+
+  mediaStack.addEventListener("pointermove", (event) => {
+    if (!dragging) {
+      return;
+    }
+    const deltaX = event.clientX - dragStartX;
+    const deltaY = event.clientY - dragStartY;
+    if (!dragIsHorizontal && Math.abs(deltaX) > 8 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      dragIsHorizontal = true;
+    }
+    if (dragIsHorizontal) {
+      event.preventDefault();
+      dragDeltaX = deltaX;
+    }
+  });
+
+  const endDrag = () => {
+    if (!dragging) {
+      return;
+    }
+    dragging = false;
+    if (dragIsHorizontal) {
+      suppressNextClick = true;
+      if (Math.abs(dragDeltaX) > SWIPE_THRESHOLD) {
+        go(dragDeltaX < 0 ? 1 : -1);
+      }
+    }
+  };
+
+  mediaStack.addEventListener("pointerup", endDrag);
+  mediaStack.addEventListener("pointercancel", endDrag);
+  mediaStack.addEventListener("pointerleave", endDrag);
+
+  // a swipe shouldn't also fire the card's link navigation
+  mediaStack.addEventListener(
+    "click",
+    (event) => {
+      if (suppressNextClick) {
+        event.preventDefault();
+        suppressNextClick = false;
+      }
+    },
+    true,
+  );
+
+  mediaStack.querySelectorAll("img").forEach((img) => {
+    img.addEventListener("dragstart", (event) => event.preventDefault());
+  });
+
   // pin the body to the tallest project's height so switching cards doesn't
   // shift page layout (mainly matters on narrow viewports, where text wraps
   // to different line counts per project)
