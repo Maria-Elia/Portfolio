@@ -20,6 +20,41 @@ function initNav() {
     });
   });
 }
+function initCvModal() {
+  const trigger = document.querySelector("[data-cv-trigger]");
+  const modal = document.querySelector("[data-cv-modal]");
+
+  if (!trigger || !modal) {
+    return;
+  }
+
+  const frame = modal.querySelector("[data-cv-frame]");
+  const cvSrc = "assets/CV_Portfolio.pdf";
+
+  const open = () => {
+    if (!frame.src) {
+      frame.src = cvSrc;
+    }
+    modal.classList.add("cv-modal--open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+
+  const close = () => {
+    modal.classList.remove("cv-modal--open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  trigger.addEventListener("click", open);
+  modal.querySelectorAll("[data-cv-close]").forEach((el) => el.addEventListener("click", close));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal.classList.contains("cv-modal--open")) {
+      close();
+    }
+  });
+}
+
 function initAnchorScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (event) => {
@@ -1180,6 +1215,7 @@ function initCloudWipe() {
 document.addEventListener("DOMContentLoaded", async () => {
   initPreloader(initCloudWipe);
   initNav();
+  initCvModal();
   initAnchorScroll();
   initDecorGating(); // first, so its triggers refresh in page order
   initHero();

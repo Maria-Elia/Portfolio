@@ -164,15 +164,13 @@
               data-title-svg-mount="cat-paw"></span>cats</span>.
         </p>
 
-        <!--
-        <a href="#projects" class="about__cta btn-pill">
+        <button type="button" class="about__cta btn-pill" data-cv-trigger>
           <span class="sparkle sparkle--tl"></span>
           <span class="sparkle sparkle--tr"></span>
           <span class="sparkle sparkle--bl"></span>
           <span class="sparkle sparkle--br"></span>
-          MORE ABOUT ME
-        </a>
-        -->
+          MY CV
+        </button>
       </div>
     </section>
 
@@ -330,6 +328,24 @@
   </footer>
 
   <img src="assets/img/Kleddie.webp" alt="" class="about__cat-peek" aria-hidden="true">
+
+  <div class="cv-modal" data-cv-modal aria-hidden="true">
+    <div class="cv-modal__backdrop" data-cv-close></div>
+    <div class="cv-modal__panel" role="dialog" aria-modal="true" aria-label="Maria Elia's CV">
+      <button type="button" class="cv-modal__close" aria-label="Close CV" data-cv-close>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+        </svg>
+      </button>
+      <iframe class="cv-modal__frame" data-cv-frame title="Maria Elia's CV"></iframe>
+      <div class="cv-modal__footer">
+        <a class="cv-modal__download btn-pill btn-pill--small" href="assets/CV_Portfolio.pdf"
+          download="Maria_Elia_CV.pdf">
+          Download PDF
+        </a>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
