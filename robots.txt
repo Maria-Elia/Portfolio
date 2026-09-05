@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot-Image
+Disallow: /assets/img/design/png/hero_left.png
+Disallow: /assets/img/design/webp/hero_left.webp
+Disallow: /assets/img/design/png/hero_right.png
+Disallow: /assets/img/design/webp/hero_right.webp
+
 Sitemap: https://mariaelia.de/sitemap.xml
