@@ -1,0 +1,23 @@
+name: IndexNow ping
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify search engines via IndexNow
+        run: |
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+              "host": "mariaelia.de",
+              "key": "92eaed15573e44d090d614304a38d01a",
+              "keyLocation": "https://mariaelia.de/92eaed15573e44d090d614304a38d01a.txt",
+              "urlList": [
+                "https://mariaelia.de/",
+                "https://mariaelia.de/sitemap.xml"
+              ]
+            }'
