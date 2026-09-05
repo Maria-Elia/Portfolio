@@ -1,3 +1,51 @@
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/poppins-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/poppins-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fredoka";
+  font-style: normal;
+  font-weight: 500 600;
+  font-display: swap;
+  src: url("../assets/fonts/fredoka-variable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonts/caveat-600.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Pacifico";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/pacifico-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Righteous";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/righteous-400.woff2") format("woff2");
+}
+
 :root {
   --pink-primary: #fc97d1;
   --pink-soft: #ffaad2;
@@ -32,6 +80,18 @@ body {
   color: var(--purple-text);
   background: var(--white);
   overflow-x: clip;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 img,
@@ -465,10 +525,10 @@ ul {
   left: -15%;
   right: -15%;
   height: var(--cloud-height);
-  background: url("../assets/img/clouds.png") no-repeat center / 100% 100%;
+  background: url("../assets/img/design/png/clouds.png") no-repeat center / 100% 100%;
   background-image: image-set(
-    url("../assets/img/clouds.webp") type("image/webp"),
-    url("../assets/img/clouds.png") type("image/png")
+    url("../assets/img/design/webp/clouds.webp") type("image/webp"),
+    url("../assets/img/design/png/clouds.png") type("image/png")
   );
   -webkit-mask-image: linear-gradient(to bottom, black 76%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 76%, transparent 100%);
@@ -969,8 +1029,8 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   background: var(--purple-night);
   opacity: 0.5;
   mix-blend-mode: multiply;
-  -webkit-mask: url("../assets/img/backgroundtop.png") no-repeat top / 100% 100%;
-  mask: url("../assets/img/backgroundtop.png") no-repeat top / 100% 100%;
+  -webkit-mask: url("../assets/img/design/png/backgroundtop.png") no-repeat top / 100% 100%;
+  mask: url("../assets/img/design/png/backgroundtop.png") no-repeat top / 100% 100%;
 }
 
 .skills__tint--middle {
@@ -1943,7 +2003,11 @@ body:has(.about__cat-trigger:hover) .about__cat-peek {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("../assets/img/footer_wave.png") no-repeat top / 100% 100%;
+  background: url("../assets/img/design/png/footer_wave.png") no-repeat top / 100% 100%;
+  background-image: image-set(
+    url("../assets/img/design/webp/footer_wave.webp") type("image/webp"),
+    url("../assets/img/design/png/footer_wave.png") type("image/png")
+  );
   z-index: 0;
 }
 

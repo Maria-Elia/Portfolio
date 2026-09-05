@@ -5,14 +5,124 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maria Elia | CS Grad Student & Dev</title>
+  <meta name="description"
+    content="Portfolio of Maria Elia, a Computer Science student at RWTH Aachen building web apps, browser extensions, and developer tools.">
+  <link rel="canonical" href="https://mariaelia.de/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mariaelia.de/">
+  <meta property="og:title" content="Maria Elia | CS Grad Student & Dev">
+  <meta property="og:description"
+    content="Portfolio of Maria Elia, a Computer Science student at RWTH Aachen building web apps, browser extensions, and developer tools.">
+  <meta property="og:image" content="https://mariaelia.de/assets/img/design/png/about-illustration.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Maria Elia | CS Grad Student & Dev">
+  <meta name="twitter:description"
+    content="Portfolio of Maria Elia, a Computer Science student at RWTH Aachen building web apps, browser extensions, and developer tools.">
+  <meta name="twitter:image" content="https://mariaelia.de/assets/img/design/png/about-illustration.png">
+
   <link rel="icon" type="image/svg+xml" href="assets/svg/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@500;600&family=Pacifico&family=Poppins:wght@400;700&family=Righteous&display=swap"
-    rel="stylesheet">
+  <link rel="preload" href="assets/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
   <script data-goatcounter="https://portfolio-mariaelia.goatcounter.com/count" async
     src="//gc.zgo.at/count.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://mariaelia.de/#person",
+        "name": "Maria Elia",
+        "url": "https://mariaelia.de/",
+        "image": "https://mariaelia.de/assets/img/design/png/about-illustration.png",
+        "description": "Computer Science student at RWTH Aachen building web apps, browser extensions, and developer tools.",
+        "email": "mailto:contact@mariaelia.dev",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "RWTH Aachen University"
+        },
+        "knowsAbout": [
+          "JavaScript", "TypeScript", "Python", "Java", "HTML", "CSS",
+          "React", "Node.js", "GSAP", "Unity",
+          "MongoDB", "MariaDB", "PostgreSQL", "Git", "Docker"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/m-elia",
+          "https://github.com/Maria-Elia"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://mariaelia.de/#website",
+        "url": "https://mariaelia.de/",
+        "name": "Maria Elia | CS Grad Student & Dev",
+        "description": "Personal portfolio of Maria Elia, a Computer Science student and developer.",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://mariaelia.de/#person" }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://mariaelia.de/#webpage",
+        "url": "https://mariaelia.de/",
+        "name": "Maria Elia | CS Grad Student & Dev",
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://mariaelia.de/#website" },
+        "about": { "@id": "https://mariaelia.de/#person" },
+        "mainEntity": { "@id": "https://mariaelia.de/#person" }
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://mariaelia.de/#projects",
+        "name": "Maria Elia — Projects",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "Katzenfutter-Rechner",
+              "description": "Calculates a cat's daily food and water needs from weight and food type.",
+              "url": "https://catfood.mariaelia.de",
+              "codeRepository": "https://github.com/Maria-Elia/catfood-calculator",
+              "programmingLanguage": ["HTML", "CSS", "JavaScript"],
+              "author": { "@id": "https://mariaelia.de/#person" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "PAYBACK Coupon Activator",
+              "description": "Browser extension that activates every open PAYBACK eCoupon with one click.",
+              "url": "https://github.com/Maria-Elia/payback-coupon-adder",
+              "codeRepository": "https://github.com/Maria-Elia/payback-coupon-adder",
+              "applicationCategory": "BrowserExtension",
+              "programmingLanguage": ["JavaScript"],
+              "author": { "@id": "https://mariaelia.de/#person" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "QR Code Generator & Designer",
+              "description": "Customizable QR codes with different styles, gradients, and logo embedding.",
+              "url": "https://qrcode.mariaelia.de",
+              "codeRepository": "https://github.com/Maria-Elia/qr-code-creator",
+              "programmingLanguage": ["React", "Vite", "JavaScript"],
+              "author": { "@id": "https://mariaelia.de/#person" }
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -25,16 +135,16 @@
 
   <div class="cloud-wipe" aria-hidden="true">
     <picture>
-      <source srcset="assets/img/back.webp" type="image/webp">
-      <img src="assets/img/back.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--back">
+      <source srcset="assets/img/design/webp/back.webp" type="image/webp">
+      <img src="assets/img/design/png/back.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--back">
     </picture>
     <picture>
-      <source srcset="assets/img/middle.webp" type="image/webp">
-      <img src="assets/img/middle.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--mid">
+      <source srcset="assets/img/design/webp/middle.webp" type="image/webp">
+      <img src="assets/img/design/png/middle.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--mid">
     </picture>
     <picture>
-      <source srcset="assets/img/front.webp" type="image/webp">
-      <img src="assets/img/front.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--front">
+      <source srcset="assets/img/design/webp/front.webp" type="image/webp">
+      <img src="assets/img/design/png/front.png" alt="" class="cloud-wipe__layer cloud-wipe__layer--front">
     </picture>
   </div>
 
@@ -56,16 +166,16 @@
   <main>
     <section id="hero" class="hero">
       <picture>
-        <source srcset="assets/img/vortex.webp" type="image/webp">
-        <img src="assets/img/vortex.png" alt="" class="hero__vortex-texture">
+        <source srcset="assets/img/design/webp/vortex.webp" type="image/webp">
+        <img src="assets/img/design/png/vortex.png" alt="" class="hero__vortex-texture">
       </picture>
 
       <div class="hero__twinkles"></div>
       <div class="hero__star-field"></div>
 
       <picture>
-        <source srcset="assets/img/hero_left.webp" type="image/webp">
-        <img src="assets/img/hero_left.png" alt="" class="hero__botanical hero__botanical--left">
+        <source srcset="assets/img/design/webp/hero_left.webp" type="image/webp">
+        <img src="assets/img/design/png/hero_left.png" alt="" class="hero__botanical hero__botanical--left">
       </picture>
 
       <svg class="hero__flanking-star hero__flanking-star--left" viewBox="0 0 100 100" fill="none">
@@ -97,8 +207,8 @@
       </svg>
 
       <picture>
-        <source srcset="assets/img/hero_right.webp" type="image/webp">
-        <img src="assets/img/hero_right.png" alt="" class="hero__botanical hero__botanical--right">
+        <source srcset="assets/img/design/webp/hero_right.webp" type="image/webp">
+        <img src="assets/img/design/png/hero_right.png" alt="" class="hero__botanical hero__botanical--right">
       </picture>
 
       <svg class="hero__big-star hero__big-star--one" viewBox="0 0 100 100" fill="none" aria-hidden="true">
@@ -142,8 +252,8 @@
       </svg>
 
       <picture>
-        <source srcset="assets/img/about-illustration.webp" type="image/webp">
-        <img src="assets/img/about-illustration.png"
+        <source srcset="assets/img/design/webp/about-illustration.webp" type="image/webp">
+        <img src="assets/img/design/png/about-illustration.png"
           alt="Illustrated portrait of Maria, with a long sweeping wave of hair flowing beneath the text"
           class="about__illustration-img">
       </picture>
@@ -151,7 +261,8 @@
       <div class="about__inner">
         <div class="about__inner-sparkles" aria-hidden="true"></div>
 
-        <div class="about__title-img" role="img" aria-label="About Me" data-title-svg-mount="about"></div>
+        <h2 class="visually-hidden">About Me</h2>
+        <div class="about__title-img" aria-hidden="true" data-title-svg-mount="about"></div>
 
         <p class="about__text">
           Studying Computer Science at RWTH Aachen. I love
@@ -176,15 +287,24 @@
 
     <section id="skills" class="skills">
       <div class="skills__layer">
-        <img src="assets/img/backgroundtop.png" alt="" class="skills__bg">
+        <picture>
+          <source srcset="assets/img/design/webp/backgroundtop.webp" type="image/webp">
+          <img src="assets/img/design/png/backgroundtop.png" alt="" class="skills__bg">
+        </picture>
         <div class="skills__tint"></div>
       </div>
       <div class="skills__layer skills__layer--middle" aria-hidden="true">
-        <img src="assets/img/backgroundmiddle.png" alt="" class="skills__bg">
+        <picture>
+          <source srcset="assets/img/design/webp/backgroundmiddle.webp" type="image/webp">
+          <img src="assets/img/design/png/backgroundmiddle.png" alt="" class="skills__bg">
+        </picture>
         <div class="skills__tint skills__tint--middle"></div>
       </div>
       <div class="skills__layer skills__layer--flip">
-        <img src="assets/img/backgroundtop.png" alt="" class="skills__bg">
+        <picture>
+          <source srcset="assets/img/design/webp/backgroundtop.webp" type="image/webp">
+          <img src="assets/img/design/png/backgroundtop.png" alt="" class="skills__bg">
+        </picture>
         <div class="skills__tint"></div>
       </div>
 
@@ -197,36 +317,41 @@
         <path d="M50,5 Q54,40 95,50 Q54,60 50,95 Q46,60 5,50 Q46,40 50,5 Z" fill="var(--yellow-soft)" />
       </svg>
 
-      <div class="skills__title-img" role="img" aria-label="Skills" data-title-svg-mount="skills"></div>
+      <h2 class="visually-hidden">Skills</h2>
+      <div class="skills__title-img" aria-hidden="true" data-title-svg-mount="skills"></div>
 
       <div class="skills__inner">
 
         <div class="skills__constellations">
-          <div class="skills__constellation" data-cat="languages" role="img"
-            aria-label="Languages: JavaScript, TypeScript, Python, Java, HTML, CSS"></div>
-          <div class="skills__constellation" data-cat="frameworks" role="img"
-            aria-label="Frameworks and Engines: React, Node.js, GSAP, Unity"></div>
-          <div class="skills__constellation" data-cat="tools" role="img"
-            aria-label="Data and Dev Tools: MongoDB, MariaDB, PostgreSQL, Git, VS Code, Docker"></div>
-          <div class="skills__constellation" data-cat="ai" role="img"
-            aria-label="AI Tools: Claude, ChatGPT, GitHub Copilot"></div>
+          <div class="skills__constellation" data-cat="languages" aria-hidden="true"></div>
+          <div class="skills__constellation" data-cat="frameworks" aria-hidden="true"></div>
+          <div class="skills__constellation" data-cat="tools" aria-hidden="true"></div>
+          <div class="skills__constellation" data-cat="ai" aria-hidden="true"></div>
         </div>
+
+        <ul class="visually-hidden">
+          <li>Languages: JavaScript, TypeScript, Python, Java, HTML, CSS</li>
+          <li>Frameworks and Engines: React, Node.js, GSAP, Unity</li>
+          <li>Data and Dev Tools: MongoDB, MariaDB, PostgreSQL, Git, VS Code, Docker</li>
+          <li>AI Tools: Claude, ChatGPT, GitHub Copilot</li>
+        </ul>
       </div>
     </section>
 
     <section id="projects" class="projects">
+      <h2 class="visually-hidden">Projects</h2>
       <div class="project-spotlight" data-project-carousel>
-        <div class="project-spotlight__badge" role="img" aria-label="Projects" data-title-svg-mount="projects"></div>
+        <div class="project-spotlight__badge" aria-hidden="true" data-title-svg-mount="projects"></div>
         <div class="project-spotlight__media-stack">
           <a class="project-spotlight__media" href="https://catfood.mariaelia.de" target="_blank"
             rel="noopener noreferrer" data-project-media>
-            <img src="assets/img/projects/catfood.png" alt="Katzenfutter-Rechner screenshot" loading="lazy"
+            <img src="assets/img/projects/design/webp/catfood.webp" alt="Katzenfutter-Rechner screenshot" loading="lazy"
               data-project-img />
           </a>
           <a class="project-spotlight__media project-spotlight__media--icon"
             href="https://github.com/Maria-Elia/payback-coupon-adder" target="_blank" rel="noopener noreferrer"
             data-project-media>
-            <img src="assets/img/projects/payback-icon.png" alt="PAYBACK Coupon Activator icon" loading="lazy"
+            <img src="assets/img/projects/design/webp/payback-icon.webp" alt="PAYBACK Coupon Activator icon" loading="lazy"
               data-project-img />
           </a>
         </div>
@@ -270,6 +395,29 @@
         </button>
       </div>
 
+      <ul class="visually-hidden">
+        <li>
+          <h3>Katzenfutter-Rechner</h3>
+          <p>Calculates a cat's daily food and water needs from weight and food type.</p>
+          <p>HTML, CSS, JavaScript</p>
+          <a href="https://catfood.mariaelia.de">Live Demo</a>
+          <a href="https://github.com/Maria-Elia/catfood-calculator">Code</a>
+        </li>
+        <li>
+          <h3>PAYBACK Coupon Activator</h3>
+          <p>Browser extension that activates every open PAYBACK eCoupon with one click.</p>
+          <p>JavaScript, Chrome Extension</p>
+          <a href="https://github.com/Maria-Elia/payback-coupon-adder">Code</a>
+        </li>
+        <li>
+          <h3>QR Code Generator &amp; Designer</h3>
+          <p>Customizable QR codes with different styles, gradients, and logo embedding.</p>
+          <p>React, Vite, JavaScript</p>
+          <a href="https://qrcode.mariaelia.de">Live Demo</a>
+          <a href="https://github.com/Maria-Elia/qr-code-creator">Code</a>
+        </li>
+      </ul>
+
     </section>
 
     <section id="contact" class="contact">
@@ -285,7 +433,8 @@
           </text>
         </svg>
 
-        <div class="contact__title-img" role="img" aria-label="Let's Talk" data-title-svg-mount="contact"></div>
+        <h2 class="visually-hidden">Let's Talk</h2>
+        <div class="contact__title-img" aria-hidden="true" data-title-svg-mount="contact"></div>
       </div>
 
       <div class="contact__flip-wrap">
@@ -323,11 +472,12 @@
       </p>
       <a href="mailto:contact@mariaelia.dev" class="site-footer__email">contact@mariaelia.dev</a>
       <a href="impressum/" class="site-footer__email">Impressum</a>
+      <a href="datenschutz/" class="site-footer__email">Datenschutz</a>
       <p class="site-footer__copyright">&copy; 2026 Maria Elia. All rights reserved.</p>
     </div>
   </footer>
 
-  <img src="assets/img/Kleddie.webp" alt="" class="about__cat-peek" aria-hidden="true">
+  <img src="assets/img/design/webp/Kleddie.webp" alt="" class="about__cat-peek" aria-hidden="true">
 
   <div class="cv-modal" data-cv-modal aria-hidden="true">
     <div class="cv-modal__backdrop" data-cv-close></div>

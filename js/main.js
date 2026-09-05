@@ -167,7 +167,7 @@ const PROJECTS_DATA = [
     status: "Live",
     statusColor: "var(--teal-blue)",
     media: {
-      src: "assets/img/projects/catfood.png",
+      src: "assets/img/projects/design/webp/catfood.webp",
       alt: "Katzenfutter-Rechner screenshot",
       icon: false,
     },
@@ -184,7 +184,7 @@ const PROJECTS_DATA = [
     status: "Extension",
     statusColor: "var(--purple-deep)",
     media: {
-      src: "assets/img/projects/payback-icon.png",
+      src: "assets/img/projects/design/webp/payback-icon.webp",
       alt: "PAYBACK Coupon Activator icon",
       icon: true,
     },
@@ -200,7 +200,7 @@ const PROJECTS_DATA = [
     status: "Live",
     statusColor: "var(--teal-blue)",
     media: {
-      src: "assets/img/projects/qrcode.png",
+      src: "assets/img/projects/design/webp/qrcode.webp",
       alt: "QR Code Generator & Designer screenshot",
       icon: false,
     },
