@@ -210,6 +210,23 @@ const PROJECTS_DATA = [
       { label: "Code", href: "https://github.com/Maria-Elia/qr-code-creator", ghost: true },
     ],
   },
+  {
+    title: "TourBuilder",
+    desc: "Location-based WebXR tours pinned to real-world GPS coordinates with GPS + sensor fusion, walkable waypoints, and audio, text or visual content.",
+    tags: ["Three.js", "WebXR", "TypeScript", "GPS"],
+    status: "Live",
+    statusColor: "var(--teal-blue)",
+    media: {
+      src: "assets/img/projects/design/webp/tourbuilder.webp",
+      alt: "TourBuilder screenshot",
+      icon: false,
+    },
+    href: "https://tourbuilder.mariaelia.de",
+    actions: [
+      { label: "Live Demo", href: "https://tourbuilder.mariaelia.de", ghost: false },
+      { label: "Code", href: "https://github.com/Maria-Elia/location-based-webxr", ghost: true },
+    ],
+  },
 ];
 
 function initProjectsCarousel() {
